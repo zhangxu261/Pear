@@ -22,7 +22,7 @@ public class Task implements Serializable {
     private String projectCode;
 
     @ApiModelProperty("任务编号")
-    private String taskCode;
+    private String code;
 
     @ApiModelProperty("父级任务")
     private Long parentCode;
