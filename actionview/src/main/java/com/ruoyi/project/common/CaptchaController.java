@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,12 +17,11 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 
 /**
  * 验证码操作处理
- * 
+ *
  * @author ruoyi
  */
 @RestController
-public class CaptchaController
-{
+public class CaptchaController {
     @Autowired
     private RedisCache redisCache;
 
@@ -29,8 +29,7 @@ public class CaptchaController
      * 生成验证码
      */
     @GetMapping("/captchaImage")
-    public AjaxResult getCode(HttpServletResponse response) throws IOException
-    {
+    public AjaxResult getCode(HttpServletResponse response) throws IOException {
         // 生成随机字串
         String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
         // 唯一标识
@@ -42,20 +41,15 @@ public class CaptchaController
         int w = 111, h = 36;
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         VerifyCodeUtils.outputImage(w, h, stream, verifyCode);
-        try
-        {
+        try {
             AjaxResult ajax = AjaxResult.success();
             ajax.put("uuid", uuid);
             ajax.put("img", Base64.encode(stream.toByteArray()));
             return ajax;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return AjaxResult.error(e.getMessage());
-        }
-        finally
-        {
+        } finally {
             stream.close();
         }
     }
