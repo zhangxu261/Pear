@@ -8,7 +8,7 @@ import com.ruoyi.project.tool.gen.domain.GenTable;
 /**
  * 业务 服务层
  *
- * @author ruoyi
+ * @author lyfen
  */
 public interface IGenTableService {
     /**

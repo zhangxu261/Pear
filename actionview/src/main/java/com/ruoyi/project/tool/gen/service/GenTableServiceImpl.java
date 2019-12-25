@@ -36,7 +36,7 @@ import com.ruoyi.project.tool.gen.util.VelocityUtils;
 /**
  * 业务 服务层实现
  *
- * @author ruoyi
+ * @author lyfen
  */
 @Service
 public class GenTableServiceImpl implements IGenTableService {

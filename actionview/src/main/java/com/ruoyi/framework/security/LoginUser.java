@@ -11,7 +11,7 @@ import com.ruoyi.project.system.domain.SysUser;
 /**
  * 登录用户身份权限
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class LoginUser implements UserDetails {
     private static final long serialVersionUID = 1L;

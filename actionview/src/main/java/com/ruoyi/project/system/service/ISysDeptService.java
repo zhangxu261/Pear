@@ -8,7 +8,7 @@ import com.ruoyi.project.system.domain.SysDept;
 /**
  * 部门管理 服务层
  *
- * @author ruoyi
+ * @author lyfen
  */
 public interface ISysDeptService {
     /**

@@ -6,7 +6,7 @@ import com.ruoyi.project.monitor.domain.SysUserOnline;
 /**
  * 在线用户 服务层
  *
- * @author ruoyi
+ * @author lyfen
  */
 public interface ISysUserOnlineService {
     /**

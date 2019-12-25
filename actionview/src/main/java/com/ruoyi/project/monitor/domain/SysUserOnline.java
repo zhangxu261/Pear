@@ -3,7 +3,7 @@ package com.ruoyi.project.monitor.domain;
 /**
  * 当前在线会话
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class SysUserOnline {
     /**

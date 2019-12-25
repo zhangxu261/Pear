@@ -12,7 +12,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 角色表 sys_role
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class SysRole extends BaseEntity {
     private static final long serialVersionUID = 1L;

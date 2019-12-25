@@ -26,7 +26,7 @@ import com.ruoyi.project.system.service.ISysDictDataService;
 /**
  * 数据字典信息
  *
- * @author ruoyi
+ * @author lyfen
  */
 @RestController
 @RequestMapping("/system/dict/data")

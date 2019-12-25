@@ -11,7 +11,7 @@ import com.ruoyi.project.monitor.service.ISysLogininforService;
 /**
  * 系统访问日志情况信息 服务层处理
  *
- * @author ruoyi
+ * @author lyfen
  */
 @Service
 public class SysLogininforServiceImpl implements ISysLogininforService {

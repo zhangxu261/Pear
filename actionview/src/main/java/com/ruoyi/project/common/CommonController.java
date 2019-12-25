@@ -20,7 +20,7 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 /**
  * 通用请求处理
  *
- * @author ruoyi
+ * @author lyfen
  */
 @RestController
 public class CommonController {

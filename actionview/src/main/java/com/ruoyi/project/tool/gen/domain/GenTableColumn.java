@@ -8,7 +8,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 代码生成业务字段表 gen_table_column
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class GenTableColumn extends BaseEntity {
     private static final long serialVersionUID = 1L;

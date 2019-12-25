@@ -10,7 +10,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 通知公告表 sys_notice
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class SysNotice extends BaseEntity {
     private static final long serialVersionUID = 1L;

@@ -11,7 +11,7 @@ import com.ruoyi.project.system.domain.SysMenu;
 /**
  * Treeselect树结构实体类
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class TreeSelect implements Serializable {
     private static final long serialVersionUID = 1L;

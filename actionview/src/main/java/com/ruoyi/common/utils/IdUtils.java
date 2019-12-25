@@ -5,7 +5,7 @@ import com.ruoyi.common.core.lang.UUID;
 /**
  * ID生成器工具类
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class IdUtils {
     /**

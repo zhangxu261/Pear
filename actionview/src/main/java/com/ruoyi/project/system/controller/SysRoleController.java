@@ -27,7 +27,7 @@ import com.ruoyi.project.system.service.ISysRoleService;
 /**
  * 角色信息
  *
- * @author ruoyi
+ * @author lyfen
  */
 @RestController
 @RequestMapping("/system/role")

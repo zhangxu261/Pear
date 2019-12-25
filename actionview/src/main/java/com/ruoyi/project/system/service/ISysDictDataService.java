@@ -7,7 +7,7 @@ import com.ruoyi.project.system.domain.SysDictData;
 /**
  * 字典 业务层
  *
- * @author ruoyi
+ * @author lyfen
  */
 public interface ISysDictDataService {
     /**

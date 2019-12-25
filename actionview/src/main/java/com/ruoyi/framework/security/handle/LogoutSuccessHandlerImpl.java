@@ -23,7 +23,7 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 /**
  * 自定义退出处理类 返回成功
  *
- * @author ruoyi
+ * @author lyfen
  */
 @Configuration
 public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {

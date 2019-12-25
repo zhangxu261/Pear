@@ -13,7 +13,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 部门表 sys_dept
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class SysDept extends BaseEntity {
     private static final long serialVersionUID = 1L;

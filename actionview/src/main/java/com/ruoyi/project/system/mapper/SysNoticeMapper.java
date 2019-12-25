@@ -7,7 +7,7 @@ import com.ruoyi.project.system.domain.SysNotice;
 /**
  * 通知公告表 数据层
  *
- * @author ruoyi
+ * @author lyfen
  */
 public interface SysNoticeMapper {
     /**

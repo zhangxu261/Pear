@@ -32,7 +32,7 @@ import com.ruoyi.project.tool.gen.service.IGenTableService;
 /**
  * 代码生成 操作处理
  *
- * @author ruoyi
+ * @author lyfen
  */
 @RestController
 @RequestMapping("/tool/gen")

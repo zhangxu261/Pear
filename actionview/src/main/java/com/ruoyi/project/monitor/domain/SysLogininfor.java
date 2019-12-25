@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 系统访问记录表 sys_logininfor
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class SysLogininfor extends BaseEntity {
     private static final long serialVersionUID = 1L;

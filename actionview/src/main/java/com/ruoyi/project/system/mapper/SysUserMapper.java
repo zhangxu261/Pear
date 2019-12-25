@@ -9,7 +9,7 @@ import com.ruoyi.project.system.domain.SysUser;
 /**
  * 用户表 数据层
  *
- * @author ruoyi
+ * @author lyfen
  */
 public interface SysUserMapper {
     /**

@@ -11,7 +11,7 @@ import com.ruoyi.project.system.service.ISysNoticeService;
 /**
  * 公告 服务层实现
  *
- * @author ruoyi
+ * @author lyfen
  */
 @Service
 public class SysNoticeServiceImpl implements ISysNoticeService {

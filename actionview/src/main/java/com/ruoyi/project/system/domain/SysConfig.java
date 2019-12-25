@@ -12,7 +12,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 参数配置表 sys_config
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class SysConfig extends BaseEntity {
     private static final long serialVersionUID = 1L;

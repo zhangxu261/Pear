@@ -10,7 +10,7 @@ import com.ruoyi.project.system.domain.vo.RouterVo;
 /**
  * 菜单 业务层
  *
- * @author ruoyi
+ * @author lyfen
  */
 public interface ISysMenuService {
     /**

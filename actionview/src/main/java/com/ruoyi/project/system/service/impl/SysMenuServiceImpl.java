@@ -25,7 +25,7 @@ import com.ruoyi.project.system.service.ISysMenuService;
 /**
  * 菜单 业务层处理
  *
- * @author ruoyi
+ * @author lyfen
  */
 @Service
 public class SysMenuServiceImpl implements ISysMenuService {

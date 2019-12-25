@@ -8,7 +8,7 @@ import com.ruoyi.project.system.domain.SysDictType;
 /**
  * 字典表 数据层
  *
- * @author ruoyi
+ * @author lyfen
  */
 @Mapper
 public interface SysDictTypeMapper {

@@ -18,7 +18,7 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 /**
  * 验证码操作处理
  *
- * @author ruoyi
+ * @author lyfen
  */
 @RestController
 public class CaptchaController {

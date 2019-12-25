@@ -12,7 +12,7 @@ import com.ruoyi.project.system.service.ISysRoleService;
 /**
  * 用户权限处理
  *
- * @author ruoyi
+ * @author lyfen
  */
 @Component
 public class SysPermissionService {

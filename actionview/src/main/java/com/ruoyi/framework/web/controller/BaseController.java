@@ -22,7 +22,7 @@ import com.ruoyi.framework.web.page.TableSupport;
 /**
  * web层通用数据处理
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class BaseController {
     protected final Logger logger = LoggerFactory.getLogger(BaseController.class);

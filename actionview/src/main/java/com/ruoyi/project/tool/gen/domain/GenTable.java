@@ -11,7 +11,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 业务表 gen_table
  *
- * @author ruoyi
+ * @author lyfen
  */
 public class GenTable extends BaseEntity {
     private static final long serialVersionUID = 1L;
