@@ -3,7 +3,7 @@ package ${packageName}.service.impl;
 import java.util.List;
 #foreach ($column in $columns)
 #if($column.javaField == 'createdTime' || $column.javaField == 'updatedTime')
-import com.ruoyi.common.utils.DateUtils;
+import com.lyfen.pear.common.utils.DateUtils;
 #break
 #end
 #end

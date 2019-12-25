@@ -1,9 +1,6 @@
 package ${packageName}.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.framework.aspectj.lang.annotation.Excel;
-import com.ruoyi.framework.web.domain.BaseEntity;
+import com.lyfen.pear.framework.aspectj.lang.annotation.Excel;
 #foreach ($import in $importList)
 import ${import};
 #end
