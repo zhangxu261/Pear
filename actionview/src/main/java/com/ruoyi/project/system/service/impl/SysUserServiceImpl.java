@@ -374,12 +374,12 @@ public class SysUserServiceImpl implements ISysUserService {
                 SysUser u = userMapper.selectUserByUserName(user.getUserName());
                 if (StringUtils.isNull(u)) {
                     user.setPassword(SecurityUtils.encryptPassword(password));
-                    user.setCreateBy(operName);
+                    user.setCreatedBy(operName);
                     this.insertUser(user);
                     successNum++;
                     successMsg.append("<br/>" + successNum + "、账号 " + user.getUserName() + " 导入成功");
                 } else if (isUpdateSupport) {
-                    user.setUpdateBy(operName);
+                    user.setUpdatedBy(operName);
                     this.updateUser(user);
                     successNum++;
                     successMsg.append("<br/>" + successNum + "、账号 " + user.getUserName() + " 更新成功");

@@ -182,9 +182,9 @@ public class SysDeptServiceImpl implements ISysDeptService {
      * @param dept 当前部门
      */
     private void updateParentDeptStatus(SysDept dept) {
-        String updateBy = dept.getUpdateBy();
+        String updatedBy = dept.getUpdatedBy();
         dept = deptMapper.selectDeptById(dept.getDeptId());
-        dept.setUpdateBy(updateBy);
+        dept.setUpdatedBy(updatedBy);
         deptMapper.updateDeptStatus(dept);
     }
 

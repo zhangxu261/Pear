@@ -79,7 +79,7 @@ public class SysDeptController extends BaseController {
         if (UserConstants.NOT_UNIQUE.equals(deptService.checkDeptNameUnique(dept))) {
             return AjaxResult.error("新增部门'" + dept.getDeptName() + "'失败，部门名称已存在");
         }
-        dept.setCreateBy(SecurityUtils.getUsername());
+        dept.setCreatedBy(SecurityUtils.getUsername());
         return toAjax(deptService.insertDept(dept));
     }
 
@@ -95,7 +95,7 @@ public class SysDeptController extends BaseController {
         } else if (dept.getParentId().equals(dept.getDeptId())) {
             return AjaxResult.error("修改部门'" + dept.getDeptName() + "'失败，上级部门不能是自己");
         }
-        dept.setUpdateBy(SecurityUtils.getUsername());
+        dept.setUpdatedBy(SecurityUtils.getUsername());
         return toAjax(deptService.updateDept(dept));
     }
 

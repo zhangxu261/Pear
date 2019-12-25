@@ -183,10 +183,10 @@ public class SysRole extends BaseEntity {
                 .append("dataScope", getDataScope())
                 .append("status", getStatus())
                 .append("delFlag", getDelFlag())
-                .append("createBy", getCreateBy())
-                .append("createTime", getCreateTime())
-                .append("updateBy", getUpdateBy())
-                .append("updateTime", getUpdateTime())
+                .append("createdBy", getCreatedBy())
+                .append("createdTime", getCreatedTime())
+                .append("updatedBy", getUpdatedBy())
+                .append("updatedTime", getUpdatedTime())
                 .append("remark", getRemark())
                 .toString();
     }

@@ -79,7 +79,7 @@ public class SysMenuController extends BaseController {
         if (UserConstants.NOT_UNIQUE.equals(menuService.checkMenuNameUnique(menu))) {
             return AjaxResult.error("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         }
-        menu.setCreateBy(SecurityUtils.getUsername());
+        menu.setCreatedBy(SecurityUtils.getUsername());
         return toAjax(menuService.insertMenu(menu));
     }
 
@@ -93,7 +93,7 @@ public class SysMenuController extends BaseController {
         if (UserConstants.NOT_UNIQUE.equals(menuService.checkMenuNameUnique(menu))) {
             return AjaxResult.error("修改菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         }
-        menu.setUpdateBy(SecurityUtils.getUsername());
+        menu.setUpdatedBy(SecurityUtils.getUsername());
         return toAjax(menuService.updateMenu(menu));
     }
 

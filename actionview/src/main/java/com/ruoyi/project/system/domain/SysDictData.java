@@ -165,10 +165,10 @@ public class SysDictData extends BaseEntity {
                 .append("listClass", getListClass())
                 .append("isDefault", getIsDefault())
                 .append("status", getStatus())
-                .append("createBy", getCreateBy())
-                .append("createTime", getCreateTime())
-                .append("updateBy", getUpdateBy())
-                .append("updateTime", getUpdateTime())
+                .append("createdBy", getCreatedBy())
+                .append("createdTime", getCreatedTime())
+                .append("updatedBy", getUpdatedBy())
+                .append("updatedTime", getUpdatedTime())
                 .append("remark", getRemark())
                 .toString();
     }

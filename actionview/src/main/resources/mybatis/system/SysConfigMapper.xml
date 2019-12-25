@@ -10,14 +10,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="configKey"     column="config_key"     />
         <result property="configValue"   column="config_value"   />
         <result property="configType"    column="config_type"    />
-        <result property="createBy"      column="create_by"      />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateBy"      column="update_by"      />
-        <result property="updateTime"    column="update_time"    />
+        <result property="createdBy"      column="created_by"      />
+        <result property="createdTime"    column="created_time"    />
+        <result property="updatedBy"      column="updated_by"      />
+        <result property="updatedTime"    column="updated_time"    />
     </resultMap>
     
     <sql id="selectConfigVo">
-        select config_id, config_name, config_key, config_value, config_type, create_by, create_time, update_by, update_time, remark 
+        select config_id, config_name, config_key, config_value, config_type, created_by, created_time, updated_by, updated_time, remark
 		from sys_config
     </sql>
     
@@ -51,10 +51,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND config_key like concat('%', #{configKey}, '%')
 			</if>
 			<if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
-				and date_format(create_time,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
+				and date_format(created_time,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
 			</if>
 			<if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
-				and date_format(create_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
+				and date_format(created_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
 			</if>
 		</where>
     </select>
@@ -70,15 +70,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="configKey != null and configKey != '' ">config_key,</if>
 			<if test="configValue != null and configValue != '' ">config_value,</if>
 			<if test="configType != null and configType != '' ">config_type,</if>
-			<if test="createBy != null and createBy != ''">create_by,</if>
+			<if test="createdBy != null and createdBy != ''">created_by,</if>
 			<if test="remark != null and remark != ''">remark,</if>
- 			create_time
+ 			created_time
         )values(
 			<if test="configName != null and configName != ''">#{configName},</if>
 			<if test="configKey != null and configKey != ''">#{configKey},</if>
 			<if test="configValue != null and configValue != ''">#{configValue},</if>
 			<if test="configType != null and configType != ''">#{configType},</if>
-			<if test="createBy != null and createBy != ''">#{createBy},</if>
+			<if test="createdBy != null and createdBy != ''">#{createdBy},</if>
 			<if test="remark != null and remark != ''">#{remark},</if>
  			sysdate()
 		)
@@ -91,9 +91,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="configKey != null and configKey != ''">config_key = #{configKey},</if>
             <if test="configValue != null and configValue != ''">config_value = #{configValue},</if>
             <if test="configType != null and configType != ''">config_type = #{configType},</if>
-            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updatedBy != null and updatedBy != ''">updated_by = #{updatedBy},</if>
             <if test="remark != null">remark = #{remark},</if>
- 			update_time = sysdate()
+ 			updated_time = sysdate()
         </set>
         where config_id = #{configId}
     </update>

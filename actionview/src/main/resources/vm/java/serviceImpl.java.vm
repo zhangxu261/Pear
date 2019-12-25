@@ -2,7 +2,7 @@ package ${packageName}.service.impl;
 
 import java.util.List;
 #foreach ($column in $columns)
-#if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
+#if($column.javaField == 'createdTime' || $column.javaField == 'updatedTime')
 import com.ruoyi.common.utils.DateUtils;
 #break
 #end
@@ -59,8 +59,8 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
     public int insert${ClassName}(${ClassName} ${className})
     {
 #foreach ($column in $columns)
-#if($column.javaField == 'createTime')
-        ${className}.setCreateTime(DateUtils.getNowDate());
+#if($column.javaField == 'createdTime')
+        ${className}.setCreatedTime(DateUtils.getNowDate());
 #end
 #end
         return ${className}Mapper.insert${ClassName}(${className});
@@ -76,8 +76,8 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
     public int update${ClassName}(${ClassName} ${className})
     {
 #foreach ($column in $columns)
-#if($column.javaField == 'updateTime')
-        ${className}.setUpdateTime(DateUtils.getNowDate());
+#if($column.javaField == 'updatedTime')
+        ${className}.setUpdatedTime(DateUtils.getNowDate());
 #end
 #end
         return ${className}Mapper.update${ClassName}(${className});

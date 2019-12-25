@@ -25,7 +25,7 @@ public class GenUtils {
         genTable.setBusinessName(getBusinessName(genTable.getTableName()));
         genTable.setFunctionName(replaceText(genTable.getTableComment()));
         genTable.setFunctionAuthor(GenConfig.getAuthor());
-        genTable.setCreateBy(operName);
+        genTable.setCreatedBy(operName);
     }
 
     /**
@@ -35,7 +35,7 @@ public class GenUtils {
         String dataType = getDbType(column.getColumnType());
         String columnName = column.getColumnName();
         column.setTableId(table.getTableId());
-        column.setCreateBy(table.getCreateBy());
+        column.setCreatedBy(table.getCreatedBy());
         // 设置java字段名
         column.setJavaField(StringUtils.toCamelCase(columnName));
 
