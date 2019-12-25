@@ -7,6 +7,9 @@ import com.lyfen.pear.common.utils.SecurityUtils;
 import com.lyfen.pear.common.utils.poi.ExcelUtil;
 import com.lyfen.pear.project.system.domain.SysConfig;
 import com.lyfen.pear.project.system.service.ISysConfigService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -29,6 +32,7 @@ import com.lyfen.pear.framework.web.page.TableDataInfo;
  *
  * @author lyfen
  */
+@Api("参数配置管理")
 @RestController
 @RequestMapping("/system/config")
 public class SysConfigController extends BaseController {
@@ -38,6 +42,7 @@ public class SysConfigController extends BaseController {
     /**
      * 获取参数配置列表
      */
+    @ApiOperation("参数配置列表")
     @PreAuthorize("@ss.hasPermi('system:config:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysConfig config) {
@@ -67,6 +72,8 @@ public class SysConfigController extends BaseController {
     /**
      * 根据参数键名查询参数值
      */
+    @ApiOperation("根据参数键名查询参数值")
+    @ApiImplicitParam(name = "configKey", value = "参数键名", required = true, dataType = "string", paramType = "path")
     @GetMapping(value = "/configKey/{configKey}")
     public AjaxResult getConfigKey(@PathVariable String configKey) {
         return AjaxResult.success(configService.selectConfigByKey(configKey));
