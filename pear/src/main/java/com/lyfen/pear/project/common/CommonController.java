@@ -1,5 +1,6 @@
 package com.lyfen.pear.project.common;
 
+import cn.hutool.core.util.StrUtil;
 import com.lyfen.pear.common.utils.ServletUtils;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.common.utils.file.FileUploadUtils;
@@ -34,7 +35,7 @@ public class CommonController {
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request) {
         try {
             if (!FileUtils.isValidFilename(fileName)) {
-                throw new Exception(StringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
+                throw new Exception(StrUtil.format("文件名称({})非法，不允许下载。 ", fileName));
             }
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
             String filePath = PearConfig.getDownloadPath() + fileName;
