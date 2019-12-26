@@ -23,7 +23,7 @@ server:
 logging:
   level:
     com.lyfen.pear: debug
-    org.springframework: debug
+    org.springframework: warn
 
 # Spring配置
 spring:
@@ -75,13 +75,17 @@ token:
   expireTime: 30
 
 # MyBatis配置
-mybatis:
-  # 搜索指定包别名
-  typeAliasesPackage: com.lyfen.pear.project.**.domain
-  # 配置mapper的扫描，找到所有的mapper.xml映射文件
-  mapperLocations: classpath*:mybatis/**/*Mapper.xml
-  # 加载全局的配置文件
-  configLocation: classpath:mybatis/mybatis-config.xml
+mybatis-plus:
+  mapper-locations: classpath*:mybatis/**/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.lyfen.pear
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
 
 # PageHelper分页插件
 pagehelper:
