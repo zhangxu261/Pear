@@ -12,7 +12,7 @@ import com.lyfen.pear.common.exception.file.FileNameLengthLimitExceededException
 import com.lyfen.pear.common.exception.file.FileSizeLimitExceededException;
 import com.lyfen.pear.common.exception.file.InvalidExtensionException;
 import com.lyfen.pear.common.utils.security.Md5Utils;
-import com.lyfen.pear.framework.config.RuoYiConfig;
+import com.lyfen.pear.framework.config.PearConfig;
 
 /**
  * 文件上传工具类
@@ -33,7 +33,7 @@ public class FileUploadUtils {
     /**
      * 默认上传的地址
      */
-    private static String defaultBaseDir = RuoYiConfig.getProfile();
+    private static String defaultBaseDir = PearConfig.getProfile();
 
     private static int counter = 0;
 
@@ -129,7 +129,7 @@ public class FileUploadUtils {
     }
 
     private static final String getPathFileName(String uploadDir, String fileName) throws IOException {
-        int dirLastIndex = RuoYiConfig.getProfile().length() + 1;
+        int dirLastIndex = PearConfig.getProfile().length() + 1;
         String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
         String pathFileName = Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
         return pathFileName;

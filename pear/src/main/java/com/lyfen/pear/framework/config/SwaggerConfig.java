@@ -1,7 +1,6 @@
 package com.lyfen.pear.framework.config;
 
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -24,11 +23,6 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    /**
-     * 系统基础配置
-     */
-    @Autowired
-    private RuoYiConfig ruoyiConfig;
 
     /**
      * 创建API

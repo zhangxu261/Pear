@@ -47,7 +47,7 @@ import com.lyfen.pear.framework.aspectj.lang.annotation.Excel;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excel.ColumnType;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excel.Type;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excels;
-import com.lyfen.pear.framework.config.RuoYiConfig;
+import com.lyfen.pear.framework.config.PearConfig;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.common.exception.CustomException;
 import com.lyfen.pear.common.utils.reflect.ReflectUtils;
@@ -576,7 +576,7 @@ public class ExcelUtil<T> {
      * @param filename 文件名称
      */
     public String getAbsoluteFile(String filename) {
-        String downloadPath = RuoYiConfig.getDownloadPath() + filename;
+        String downloadPath = PearConfig.getDownloadPath() + filename;
         File desc = new File(downloadPath);
         if (!desc.getParentFile().exists()) {
             desc.getParentFile().mkdirs();

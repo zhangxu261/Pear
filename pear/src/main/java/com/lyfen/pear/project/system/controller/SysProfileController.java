@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
 import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
-import com.lyfen.pear.framework.config.RuoYiConfig;
+import com.lyfen.pear.framework.config.PearConfig;
 import com.lyfen.pear.framework.security.LoginUser;
 import com.lyfen.pear.framework.security.service.TokenService;
 import com.lyfen.pear.framework.web.controller.BaseController;
@@ -86,7 +86,7 @@ public class SysProfileController extends BaseController {
     public AjaxResult avatar(@RequestParam("avatarfile") MultipartFile file) throws IOException {
         if (!file.isEmpty()) {
             LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
-            String avatar = FileUploadUtils.upload(RuoYiConfig.getAvatarPath(), file);
+            String avatar = FileUploadUtils.upload(PearConfig.getAvatarPath(), file);
             if (userService.updateUserAvatar(loginUser.getUsername(), avatar)) {
                 AjaxResult ajax = AjaxResult.success();
                 ajax.put("imgUrl", avatar);

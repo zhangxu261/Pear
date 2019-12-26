@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  * @author lyfen
  */
 @Component
-@ConfigurationProperties(prefix = "ruoyi")
-public class RuoYiConfig {
+@ConfigurationProperties(prefix = "pear")
+public class PearConfig {
     /**
      * 上传路径
      */
@@ -21,7 +21,7 @@ public class RuoYiConfig {
     }
 
     public void setProfile(String profile) {
-        RuoYiConfig.profile = profile;
+        PearConfig.profile = profile;
     }
 
     /**
