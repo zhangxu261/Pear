@@ -35,7 +35,7 @@ import com.lyfen.pear.project.system.mapper.SysUserRoleMapper;
 public class SysUserService {
 
     @Autowired
-    private SysUserMapper sysUserMapper;
+    private SysUserMapper userMapper;
 
     @Autowired
     private SysRoleMapper roleMapper;
@@ -60,7 +60,7 @@ public class SysUserService {
      */
     @DataScope(deptAlias = "d", userAlias = "u")
     public List<SysUser> selectUserList(SysUser user) {
-        return sysUserMapper.selectUserList(user);
+        return userMapper.selectUserList(user);
     }
 
     /**
@@ -70,7 +70,7 @@ public class SysUserService {
      * @return 用户对象信息
      */
     public SysUser selectUserByUserName(String userName) {
-        return sysUserMapper.selectUserByUserName(userName);
+        return userMapper.selectUserByUserName(userName);
     }
 
     /**
@@ -80,7 +80,7 @@ public class SysUserService {
      * @return 用户对象信息
      */
     public SysUser selectUserById(Long userId) {
-        return sysUserMapper.selectUserById(userId);
+        return userMapper.selectUserById(userId);
     }
 
     /**
@@ -126,7 +126,7 @@ public class SysUserService {
      * @return 结果
      */
     public String checkUserNameUnique(String userName) {
-        int count = sysUserMapper.checkUserNameUnique(userName);
+        int count = userMapper.checkUserNameUnique(userName);
         if (count > 0) {
             return UserConstants.NOT_UNIQUE;
         }
@@ -141,7 +141,7 @@ public class SysUserService {
      */
     public String checkPhoneUnique(SysUser user) {
         Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
-        SysUser info = sysUserMapper.checkPhoneUnique(user.getPhonenumber());
+        SysUser info = userMapper.checkPhoneUnique(user.getPhonenumber());
         if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId.longValue()) {
             return UserConstants.NOT_UNIQUE;
         }
@@ -156,7 +156,7 @@ public class SysUserService {
      */
     public String checkEmailUnique(SysUser user) {
         Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
-        SysUser info = sysUserMapper.checkEmailUnique(user.getEmail());
+        SysUser info = userMapper.checkEmailUnique(user.getEmail());
         if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId.longValue()) {
             return UserConstants.NOT_UNIQUE;
         }
@@ -183,7 +183,7 @@ public class SysUserService {
     @Transactional
     public int insertUser(SysUser user) {
         // 新增用户信息
-        int rows = sysUserMapper.insertUser(user);
+        int rows = userMapper.insertUser(user);
         // 新增用户岗位关联
         insertUserPost(user);
         // 新增用户与角色管理
@@ -208,7 +208,7 @@ public class SysUserService {
         userPostMapper.deleteUserPostByUserId(userId);
         // 新增用户与岗位管理
         insertUserPost(user);
-        return sysUserMapper.updateUser(user);
+        return userMapper.updateUser(user);
     }
 
     /**
@@ -218,7 +218,7 @@ public class SysUserService {
      * @return 结果
      */
     public int updateUserStatus(SysUser user) {
-        return sysUserMapper.updateUser(user);
+        return userMapper.updateUser(user);
     }
 
     /**
@@ -228,7 +228,7 @@ public class SysUserService {
      * @return 结果
      */
     public int updateUserProfile(SysUser user) {
-        return sysUserMapper.updateUser(user);
+        return userMapper.updateUser(user);
     }
 
     /**
@@ -239,7 +239,7 @@ public class SysUserService {
      * @return 结果
      */
     public boolean updateUserAvatar(String userName, String avatar) {
-        return sysUserMapper.updateUserAvatar(userName, avatar) > 0;
+        return userMapper.updateUserAvatar(userName, avatar) > 0;
     }
 
     /**
@@ -249,7 +249,7 @@ public class SysUserService {
      * @return 结果
      */
     public int resetPwd(SysUser user) {
-        return sysUserMapper.updateUser(user);
+        return userMapper.updateUser(user);
     }
 
     /**
@@ -260,7 +260,7 @@ public class SysUserService {
      * @return 结果
      */
     public int resetUserPwd(String userName, String password) {
-        return sysUserMapper.resetUserPwd(userName, password);
+        return userMapper.resetUserPwd(userName, password);
     }
 
     /**
@@ -318,7 +318,7 @@ public class SysUserService {
         userRoleMapper.deleteUserRoleByUserId(userId);
         // 删除用户与岗位表
         userPostMapper.deleteUserPostByUserId(userId);
-        return sysUserMapper.deleteUserById(userId);
+        return userMapper.deleteUserById(userId);
     }
 
     /**
@@ -331,7 +331,7 @@ public class SysUserService {
         for (Long userId : userIds) {
             checkUserAllowed(new SysUser(userId));
         }
-        return sysUserMapper.deleteUserByIds(userIds);
+        return userMapper.deleteUserByIds(userIds);
     }
 
     /**
@@ -354,7 +354,7 @@ public class SysUserService {
         for (SysUser user : userList) {
             try {
                 // 验证是否存在这个用户
-                SysUser u = sysUserMapper.selectUserByUserName(user.getUserName());
+                SysUser u = userMapper.selectUserByUserName(user.getUserName());
                 if (StringUtils.isNull(u)) {
                     user.setPassword(SecurityUtils.encryptPassword(password));
                     user.setCreatedBy(operName);

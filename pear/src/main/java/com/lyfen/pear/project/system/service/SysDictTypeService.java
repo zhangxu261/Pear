@@ -19,10 +19,10 @@ import java.util.List;
 @Service
 public class SysDictTypeService {
     @Autowired
-    private SysDictTypeMapper sysDictTypeMapper;
+    private SysDictTypeMapper dictTypeMapper;
 
     @Autowired
-    private SysDictDataMapper sysDictDataMapper;
+    private SysDictDataMapper dictDataMapper;
 
     /**
      * 根据条件分页查询字典类型
@@ -31,7 +31,7 @@ public class SysDictTypeService {
      * @return 字典类型集合信息
      */
     public List<SysDictType> selectDictTypeList(SysDictType dictType) {
-        return sysDictTypeMapper.selectDictTypeList(dictType);
+        return dictTypeMapper.selectDictTypeList(dictType);
     }
 
     /**
@@ -40,7 +40,7 @@ public class SysDictTypeService {
      * @return 字典类型集合信息
      */
     public List<SysDictType> selectDictTypeAll() {
-        return sysDictTypeMapper.selectDictTypeAll();
+        return dictTypeMapper.selectDictTypeAll();
     }
 
     /**
@@ -50,7 +50,7 @@ public class SysDictTypeService {
      * @return 字典类型
      */
     public SysDictType selectDictTypeById(Long dictId) {
-        return sysDictTypeMapper.selectDictTypeById(dictId);
+        return dictTypeMapper.selectDictTypeById(dictId);
     }
 
     /**
@@ -60,7 +60,7 @@ public class SysDictTypeService {
      * @return 字典类型
      */
     public SysDictType selectDictTypeByType(String dictType) {
-        return sysDictTypeMapper.selectDictTypeByType(dictType);
+        return dictTypeMapper.selectDictTypeByType(dictType);
     }
 
     /**
@@ -70,7 +70,7 @@ public class SysDictTypeService {
      * @return 结果
      */
     public int deleteDictTypeById(Long dictId) {
-        return sysDictTypeMapper.deleteDictTypeById(dictId);
+        return dictTypeMapper.deleteDictTypeById(dictId);
     }
 
     /**
@@ -80,7 +80,7 @@ public class SysDictTypeService {
      * @return 结果
      */
     public int deleteDictTypeByIds(Long[] dictIds) {
-        return sysDictTypeMapper.deleteDictTypeByIds(dictIds);
+        return dictTypeMapper.deleteDictTypeByIds(dictIds);
     }
 
     /**
@@ -90,7 +90,7 @@ public class SysDictTypeService {
      * @return 结果
      */
     public int insertDictType(SysDictType dictType) {
-        return sysDictTypeMapper.insertDictType(dictType);
+        return dictTypeMapper.insertDictType(dictType);
     }
 
     /**
@@ -101,9 +101,9 @@ public class SysDictTypeService {
      */
     @Transactional
     public int updateDictType(SysDictType dictType) {
-        SysDictType oldDict = sysDictTypeMapper.selectDictTypeById(dictType.getDictId());
-        sysDictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());
-        return sysDictTypeMapper.updateDictType(dictType);
+        SysDictType oldDict = dictTypeMapper.selectDictTypeById(dictType.getDictId());
+        dictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());
+        return dictTypeMapper.updateDictType(dictType);
     }
 
     /**
@@ -114,7 +114,7 @@ public class SysDictTypeService {
      */
     public String checkDictTypeUnique(SysDictType dict) {
         Long dictId = StringUtils.isNull(dict.getDictId()) ? -1L : dict.getDictId();
-        SysDictType dictType = sysDictTypeMapper.checkDictTypeUnique(dict.getDictType());
+        SysDictType dictType = dictTypeMapper.checkDictTypeUnique(dict.getDictType());
         if (StringUtils.isNotNull(dictType) && dictType.getDictId().longValue() != dictId.longValue()) {
             return UserConstants.NOT_UNIQUE;
         }

@@ -25,10 +25,10 @@ public class SysMenuService {
     public static final String PREMISSION_STRING = "perms[\"{0}\"]";
 
     @Autowired
-    private SysMenuMapper sysMenuMapper;
+    private SysMenuMapper menuMapper;
 
     @Autowired
-    private SysRoleMenuMapper sysRoleMenuMapper;
+    private SysRoleMenuMapper roleMenuMapper;
 
     /**
      * 查询系统菜单列表
@@ -37,7 +37,7 @@ public class SysMenuService {
      * @return 菜单列表
      */
     public List<SysMenu> selectMenuList(SysMenu menu) {
-        List<SysMenu> menuList = sysMenuMapper.selectMenuList(menu);
+        List<SysMenu> menuList = menuMapper.selectMenuList(menu);
         return menuList;
     }
 
@@ -48,7 +48,7 @@ public class SysMenuService {
      * @return 权限列表
      */
     public Set<String> selectMenuPermsByUserId(Long userId) {
-        List<String> perms = sysMenuMapper.selectMenuPermsByUserId(userId);
+        List<String> perms = menuMapper.selectMenuPermsByUserId(userId);
         Set<String> permsSet = new HashSet<>();
         for (String perm : perms) {
             if (StringUtils.isNotEmpty(perm)) {
@@ -67,9 +67,9 @@ public class SysMenuService {
     public List<SysMenu> selectMenuTreeByUserId(Long userId) {
         List<SysMenu> menus = null;
         if (SecurityUtils.isAdmin(userId)) {
-            menus = sysMenuMapper.selectMenuTreeAll();
+            menus = menuMapper.selectMenuTreeAll();
         } else {
-            menus = sysMenuMapper.selectMenuTreeByUserId(userId);
+            menus = menuMapper.selectMenuTreeByUserId(userId);
         }
         return getChildPerms(menus, 0);
     }
@@ -81,7 +81,7 @@ public class SysMenuService {
      * @return 选中菜单列表
      */
     public List<Integer> selectMenuListByRoleId(Long roleId) {
-        return sysMenuMapper.selectMenuListByRoleId(roleId);
+        return menuMapper.selectMenuListByRoleId(roleId);
     }
 
     /**
@@ -149,7 +149,7 @@ public class SysMenuService {
      * @return 菜单信息
      */
     public SysMenu selectMenuById(Long menuId) {
-        return sysMenuMapper.selectMenuById(menuId);
+        return menuMapper.selectMenuById(menuId);
     }
 
     /**
@@ -159,7 +159,7 @@ public class SysMenuService {
      * @return 结果
      */
     public boolean hasChildByMenuId(Long menuId) {
-        int result = sysMenuMapper.hasChildByMenuId(menuId);
+        int result = menuMapper.hasChildByMenuId(menuId);
         return result > 0 ? true : false;
     }
 
@@ -170,7 +170,7 @@ public class SysMenuService {
      * @return 结果
      */
     public boolean checkMenuExistRole(Long menuId) {
-        int result = sysRoleMenuMapper.checkMenuExistRole(menuId);
+        int result = roleMenuMapper.checkMenuExistRole(menuId);
         return result > 0 ? true : false;
     }
 
@@ -181,7 +181,7 @@ public class SysMenuService {
      * @return 结果
      */
     public int insertMenu(SysMenu menu) {
-        return sysMenuMapper.insertMenu(menu);
+        return menuMapper.insertMenu(menu);
     }
 
     /**
@@ -191,7 +191,7 @@ public class SysMenuService {
      * @return 结果
      */
     public int updateMenu(SysMenu menu) {
-        return sysMenuMapper.updateMenu(menu);
+        return menuMapper.updateMenu(menu);
     }
 
     /**
@@ -201,7 +201,7 @@ public class SysMenuService {
      * @return 结果
      */
     public int deleteMenuById(Long menuId) {
-        return sysMenuMapper.deleteMenuById(menuId);
+        return menuMapper.deleteMenuById(menuId);
     }
 
     /**
@@ -212,7 +212,7 @@ public class SysMenuService {
      */
     public String checkMenuNameUnique(SysMenu menu) {
         Long menuId = StringUtils.isNull(menu.getMenuId()) ? -1L : menu.getMenuId();
-        SysMenu info = sysMenuMapper.checkMenuNameUnique(menu.getMenuName(), menu.getParentId());
+        SysMenu info = menuMapper.checkMenuNameUnique(menu.getMenuName(), menu.getParentId());
         if (StringUtils.isNotNull(info) && info.getMenuId().longValue() != menuId.longValue()) {
             return UserConstants.NOT_UNIQUE;
         }

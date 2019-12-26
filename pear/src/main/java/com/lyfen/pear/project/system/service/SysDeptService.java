@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class SysDeptService {
     @Autowired
-    private SysDeptMapper sysDeptMapper;
+    private SysDeptMapper deptMapper;
 
     /**
      * 查询部门管理数据
@@ -33,7 +33,7 @@ public class SysDeptService {
      */
     @DataScope(deptAlias = "d")
     public List<SysDept> selectDeptList(SysDept dept) {
-        return sysDeptMapper.selectDeptList(dept);
+        return deptMapper.selectDeptList(dept);
     }
 
     /**
@@ -76,7 +76,7 @@ public class SysDeptService {
      * @return 选中部门列表
      */
     public List<Integer> selectDeptListByRoleId(Long roleId) {
-        return sysDeptMapper.selectDeptListByRoleId(roleId);
+        return deptMapper.selectDeptListByRoleId(roleId);
     }
 
     /**
@@ -86,7 +86,7 @@ public class SysDeptService {
      * @return 部门信息
      */
     public SysDept selectDeptById(Long deptId) {
-        return sysDeptMapper.selectDeptById(deptId);
+        return deptMapper.selectDeptById(deptId);
     }
 
     /**
@@ -96,7 +96,7 @@ public class SysDeptService {
      * @return 结果
      */
     public boolean hasChildByDeptId(Long deptId) {
-        int result = sysDeptMapper.hasChildByDeptId(deptId);
+        int result = deptMapper.hasChildByDeptId(deptId);
         return result > 0 ? true : false;
     }
 
@@ -107,7 +107,7 @@ public class SysDeptService {
      * @return 结果 true 存在 false 不存在
      */
     public boolean checkDeptExistUser(Long deptId) {
-        int result = sysDeptMapper.checkDeptExistUser(deptId);
+        int result = deptMapper.checkDeptExistUser(deptId);
         return result > 0 ? true : false;
     }
 
@@ -119,7 +119,7 @@ public class SysDeptService {
      */
     public String checkDeptNameUnique(SysDept dept) {
         Long deptId = StringUtils.isNull(dept.getDeptId()) ? -1L : dept.getDeptId();
-        SysDept info = sysDeptMapper.checkDeptNameUnique(dept.getDeptName(), dept.getParentId());
+        SysDept info = deptMapper.checkDeptNameUnique(dept.getDeptName(), dept.getParentId());
         if (StringUtils.isNotNull(info) && info.getDeptId().longValue() != deptId.longValue()) {
             return UserConstants.NOT_UNIQUE;
         }
@@ -133,13 +133,13 @@ public class SysDeptService {
      * @return 结果
      */
     public int insertDept(SysDept dept) {
-        SysDept info = sysDeptMapper.selectDeptById(dept.getParentId());
+        SysDept info = deptMapper.selectDeptById(dept.getParentId());
         // 如果父节点不为正常状态,则不允许新增子节点
         if (!UserConstants.DEPT_NORMAL.equals(info.getStatus())) {
             throw new CustomException("部门停用，不允许新增");
         }
         dept.setAncestors(info.getAncestors() + "," + dept.getParentId());
-        return sysDeptMapper.insertDept(dept);
+        return deptMapper.insertDept(dept);
     }
 
     /**
@@ -149,15 +149,15 @@ public class SysDeptService {
      * @return 结果
      */
     public int updateDept(SysDept dept) {
-        SysDept newParentDept = sysDeptMapper.selectDeptById(dept.getParentId());
-        SysDept oldDept = sysDeptMapper.selectDeptById(dept.getDeptId());
+        SysDept newParentDept = deptMapper.selectDeptById(dept.getParentId());
+        SysDept oldDept = deptMapper.selectDeptById(dept.getDeptId());
         if (StringUtils.isNotNull(newParentDept) && StringUtils.isNotNull(oldDept)) {
             String newAncestors = newParentDept.getAncestors() + "," + newParentDept.getDeptId();
             String oldAncestors = oldDept.getAncestors();
             dept.setAncestors(newAncestors);
             updateDeptChildren(dept.getDeptId(), newAncestors, oldAncestors);
         }
-        int result = sysDeptMapper.updateDept(dept);
+        int result = deptMapper.updateDept(dept);
         if (UserConstants.DEPT_NORMAL.equals(dept.getStatus())) {
             // 如果该部门是启用状态，则启用该部门的所有上级部门
             updateParentDeptStatus(dept);
@@ -172,9 +172,9 @@ public class SysDeptService {
      */
     private void updateParentDeptStatus(SysDept dept) {
         String updatedBy = dept.getUpdatedBy();
-        dept = sysDeptMapper.selectDeptById(dept.getDeptId());
+        dept = deptMapper.selectDeptById(dept.getDeptId());
         dept.setUpdatedBy(updatedBy);
-        sysDeptMapper.updateDeptStatus(dept);
+        deptMapper.updateDeptStatus(dept);
     }
 
     /**
@@ -185,12 +185,12 @@ public class SysDeptService {
      * @param oldAncestors 旧的父ID集合
      */
     public void updateDeptChildren(Long deptId, String newAncestors, String oldAncestors) {
-        List<SysDept> children = sysDeptMapper.selectChildrenDeptById(deptId);
+        List<SysDept> children = deptMapper.selectChildrenDeptById(deptId);
         for (SysDept child : children) {
             child.setAncestors(child.getAncestors().replace(oldAncestors, newAncestors));
         }
         if (children.size() > 0) {
-            sysDeptMapper.updateDeptChildren(children);
+            deptMapper.updateDeptChildren(children);
         }
     }
 
@@ -201,7 +201,7 @@ public class SysDeptService {
      * @return 结果
      */
     public int deleteDeptById(Long deptId) {
-        return sysDeptMapper.deleteDeptById(deptId);
+        return deptMapper.deleteDeptById(deptId);
     }
 
     /**

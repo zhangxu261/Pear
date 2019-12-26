@@ -2,7 +2,11 @@ package com.lyfen.pear.project.tool.gen.mapper;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lyfen.pear.project.tool.gen.domain.GenTable;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 业务 数据层
@@ -17,6 +21,7 @@ public interface GenTableMapper {
      * @return 业务集合
      */
     public List<GenTable> selectGenTableList(GenTable genTable);
+    IPage<GenTable> selectGenTablePage(Page page, @Param("genTable") GenTable genTable);
 
     /**
      * 查询据库列表
@@ -25,6 +30,7 @@ public interface GenTableMapper {
      * @return 数据库表集合
      */
     public List<GenTable> selectDbTableList(GenTable genTable);
+    IPage<GenTable> selectDbTablePage(Page page, @Param("genTable") GenTable genTable);
 
     /**
      * 查询据库列表

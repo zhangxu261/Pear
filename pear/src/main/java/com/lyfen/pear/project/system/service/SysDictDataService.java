@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class SysDictDataService {
     @Autowired
-    private SysDictDataMapper sysDictDataMapper;
+    private SysDictDataMapper dictDataMapper;
 
     /**
      * 根据条件分页查询字典数据
@@ -24,7 +24,7 @@ public class SysDictDataService {
      * @return 字典数据集合信息
      */
     public List<SysDictData> selectDictDataList(SysDictData dictData) {
-        return sysDictDataMapper.selectDictDataList(dictData);
+        return dictDataMapper.selectDictDataList(dictData);
     }
 
     /**
@@ -34,7 +34,7 @@ public class SysDictDataService {
      * @return 字典数据集合信息
      */
     public List<SysDictData> selectDictDataByType(String dictType) {
-        return sysDictDataMapper.selectDictDataByType(dictType);
+        return dictDataMapper.selectDictDataByType(dictType);
     }
 
     /**
@@ -45,7 +45,7 @@ public class SysDictDataService {
      * @return 字典标签
      */
     public String selectDictLabel(String dictType, String dictValue) {
-        return sysDictDataMapper.selectDictLabel(dictType, dictValue);
+        return dictDataMapper.selectDictLabel(dictType, dictValue);
     }
 
     /**
@@ -55,7 +55,7 @@ public class SysDictDataService {
      * @return 字典数据
      */
     public SysDictData selectDictDataById(Long dictCode) {
-        return sysDictDataMapper.selectDictDataById(dictCode);
+        return dictDataMapper.selectDictDataById(dictCode);
     }
 
     /**
@@ -65,7 +65,7 @@ public class SysDictDataService {
      * @return 结果
      */
     public int deleteDictDataById(Long dictCode) {
-        return sysDictDataMapper.deleteDictDataById(dictCode);
+        return dictDataMapper.deleteDictDataById(dictCode);
     }
 
     /**
@@ -75,7 +75,7 @@ public class SysDictDataService {
      * @return 结果
      */
     public int deleteDictDataByIds(Long[] dictCodes) {
-        return sysDictDataMapper.deleteDictDataByIds(dictCodes);
+        return dictDataMapper.deleteDictDataByIds(dictCodes);
     }
 
     /**
@@ -85,7 +85,7 @@ public class SysDictDataService {
      * @return 结果
      */
     public int insertDictData(SysDictData dictData) {
-        return sysDictDataMapper.insertDictData(dictData);
+        return dictDataMapper.insertDictData(dictData);
     }
 
     /**
@@ -95,6 +95,6 @@ public class SysDictDataService {
      * @return 结果
      */
     public int updateDictData(SysDictData dictData) {
-        return sysDictDataMapper.updateDictData(dictData);
+        return dictDataMapper.updateDictData(dictData);
     }
 }

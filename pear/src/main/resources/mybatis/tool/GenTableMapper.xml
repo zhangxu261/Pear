@@ -70,8 +70,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 			</if> -->
 		</where>
 	</select>
+	<select id="selectGenTablePage" resultMap="GenTableResult">
+		<include refid="selectGenTableVo"/>
+		<where>
+			<if test="tableName != null and tableName != ''">
+				AND lower(table_name) like lower(concat('%', #{tableName}, '%'))
+			</if>
+			<if test="tableComment != null and tableComment != ''">
+				AND lower(table_comment) like lower(concat('%', #{tableComment}, '%'))
+			</if>
+		</where>
+	</select>
 
 	<select id="selectDbTableList" parameterType="GenTable" resultMap="GenTableResult">
+		select table_name, table_comment, create_time, update_time from information_schema.tables
+		where table_schema = (select database())
+		AND table_name NOT LIKE 'qrtz_%' AND table_name NOT LIKE 'gen_%'
+		AND table_name NOT IN (select table_name from gen_table)
+		<if test="tableName != null and tableName != ''">
+			AND lower(table_name) like lower(concat('%', #{tableName}, '%'))
+		</if>
+		<if test="tableComment != null and tableComment != ''">
+			AND lower(table_comment) like lower(concat('%', #{tableComment}, '%'))
+		</if>
+		<if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+			AND date_format(created_time,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+			AND date_format(created_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
+		</if>
+	</select>
+
+	<select id="selectDbTablePage" resultMap="GenTableResult">
 		select table_name, table_comment, create_time, update_time from information_schema.tables
 		where table_schema = (select database())
 		AND table_name NOT LIKE 'qrtz_%' AND table_name NOT LIKE 'gen_%'

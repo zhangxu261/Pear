@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class SysConfigService {
     @Autowired
-    private SysConfigMapper sysConfigMapper;
+    private SysConfigMapper configMapper;
 
     /**
      * 查询参数配置信息
@@ -28,7 +28,7 @@ public class SysConfigService {
     public SysConfig selectConfigById(Long configId) {
         SysConfig config = new SysConfig();
         config.setConfigId(configId);
-        return sysConfigMapper.selectConfig(config);
+        return configMapper.selectConfig(config);
     }
 
     /**
@@ -40,7 +40,7 @@ public class SysConfigService {
     public String selectConfigByKey(String configKey) {
         SysConfig config = new SysConfig();
         config.setConfigKey(configKey);
-        SysConfig retConfig = sysConfigMapper.selectConfig(config);
+        SysConfig retConfig = configMapper.selectConfig(config);
         return StringUtils.isNotNull(retConfig) ? retConfig.getConfigValue() : "";
     }
 
@@ -51,7 +51,7 @@ public class SysConfigService {
      * @return 参数配置集合
      */
     public List<SysConfig> selectConfigList(SysConfig config) {
-        return sysConfigMapper.selectConfigList(config);
+        return configMapper.selectConfigList(config);
     }
 
     /**
@@ -61,7 +61,7 @@ public class SysConfigService {
      * @return 结果
      */
     public int insertConfig(SysConfig config) {
-        return sysConfigMapper.insertConfig(config);
+        return configMapper.insertConfig(config);
     }
 
     /**
@@ -71,7 +71,7 @@ public class SysConfigService {
      * @return 结果
      */
     public int updateConfig(SysConfig config) {
-        return sysConfigMapper.updateConfig(config);
+        return configMapper.updateConfig(config);
     }
 
     /**
@@ -81,7 +81,7 @@ public class SysConfigService {
      * @return 结果
      */
     public int deleteConfigById(Long configId) {
-        return sysConfigMapper.deleteConfigById(configId);
+        return configMapper.deleteConfigById(configId);
     }
 
     /**
@@ -91,7 +91,7 @@ public class SysConfigService {
      * @return 结果
      */
     public int deleteConfigByIds(Long[] configIds) {
-        return sysConfigMapper.deleteConfigByIds(configIds);
+        return configMapper.deleteConfigByIds(configIds);
     }
 
     /**
@@ -102,7 +102,7 @@ public class SysConfigService {
      */
     public String checkConfigKeyUnique(SysConfig config) {
         Long configId = StringUtils.isNull(config.getConfigId()) ? -1L : config.getConfigId();
-        SysConfig info = sysConfigMapper.checkConfigKeyUnique(config.getConfigKey());
+        SysConfig info = configMapper.checkConfigKeyUnique(config.getConfigKey());
         if (StringUtils.isNotNull(info) && info.getConfigId().longValue() != configId.longValue()) {
             return UserConstants.NOT_UNIQUE;
         }

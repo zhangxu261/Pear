@@ -2,6 +2,8 @@ package com.lyfen.pear.project.tool.gen.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lyfen.pear.common.constant.Constants;
 import com.lyfen.pear.common.constant.GenConstants;
 import com.lyfen.pear.common.exception.CustomException;
@@ -67,6 +69,9 @@ public class GenTableService {
     public List<GenTable> selectGenTableList(GenTable genTable) {
         return genTableMapper.selectGenTableList(genTable);
     }
+    public IPage<GenTable> selectGenTablePage(Page page, GenTable genTable) {
+        return genTableMapper.selectGenTablePage(page, genTable);
+    }
 
     /**
      * 查询据库列表
@@ -76,6 +81,9 @@ public class GenTableService {
      */
     public List<GenTable> selectDbTableList(GenTable genTable) {
         return genTableMapper.selectDbTableList(genTable);
+    }
+    public IPage<GenTable> selectDbTablePage(Page page, GenTable genTable) {
+        return genTableMapper.selectDbTablePage(page, genTable);
     }
 
     /**
