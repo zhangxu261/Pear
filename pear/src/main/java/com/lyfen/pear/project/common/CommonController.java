@@ -1,33 +1,28 @@
 package com.lyfen.pear.project.common;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.lyfen.pear.common.utils.ServletUtils;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.common.utils.file.FileUploadUtils;
 import com.lyfen.pear.common.utils.file.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lyfen.pear.framework.config.PearConfig;
+import com.lyfen.pear.framework.web.domain.AjaxResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import com.lyfen.pear.framework.config.PearConfig;
-import com.lyfen.pear.framework.config.ServerConfig;
-import com.lyfen.pear.framework.web.domain.AjaxResult;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 通用请求处理
  *
  * @author lyfen
  */
+@Slf4j
 @RestController
 public class CommonController {
-    private static final Logger log = LoggerFactory.getLogger(CommonController.class);
-
-    @Autowired
-    private ServerConfig serverConfig;
 
     /**
      * 通用下载请求
@@ -67,7 +62,7 @@ public class CommonController {
             String filePath = PearConfig.getUploadPath();
             // 上传并返回新文件名称
             String fileName = FileUploadUtils.upload(filePath, file);
-            String url = serverConfig.getUrl() + fileName;
+            String url = getUrl() + fileName;
             AjaxResult ajax = AjaxResult.success();
             ajax.put("fileName", fileName);
             ajax.put("url", url);
@@ -75,5 +70,12 @@ public class CommonController {
         } catch (Exception e) {
             return AjaxResult.error(e.getMessage());
         }
+    }
+
+    private String getUrl() {
+        HttpServletRequest request = ServletUtils.getRequest();
+        StringBuffer url = request.getRequestURL();
+        String contextPath = request.getServletContext().getContextPath();
+        return url.delete(url.length() - request.getRequestURI().length(), url.length()).append(contextPath).toString();
     }
 }
