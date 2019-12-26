@@ -1,5 +1,27 @@
 package com.lyfen.pear.project.tool.gen.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.lyfen.pear.common.constant.Constants;
+import com.lyfen.pear.common.constant.GenConstants;
+import com.lyfen.pear.common.exception.CustomException;
+import com.lyfen.pear.common.utils.SecurityUtils;
+import com.lyfen.pear.common.utils.StringUtils;
+import com.lyfen.pear.project.tool.gen.domain.GenTable;
+import com.lyfen.pear.project.tool.gen.domain.GenTableColumn;
+import com.lyfen.pear.project.tool.gen.mapper.*;
+import com.lyfen.pear.project.tool.gen.util.GenUtils;
+import com.lyfen.pear.project.tool.gen.util.VelocityInitializer;
+import com.lyfen.pear.project.tool.gen.util.VelocityUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -9,38 +31,14 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import com.lyfen.pear.common.constant.Constants;
-import com.lyfen.pear.common.constant.GenConstants;
-import com.lyfen.pear.common.exception.CustomException;
-import com.lyfen.pear.common.utils.SecurityUtils;
-import com.lyfen.pear.common.utils.StringUtils;
-import com.lyfen.pear.project.tool.gen.domain.GenTable;
-import com.lyfen.pear.project.tool.gen.domain.GenTableColumn;
-import com.lyfen.pear.project.tool.gen.mapper.GenTableColumnMapper;
-import com.lyfen.pear.project.tool.gen.mapper.GenTableMapper;
-import com.lyfen.pear.project.tool.gen.util.GenUtils;
-import com.lyfen.pear.project.tool.gen.util.VelocityInitializer;
-import com.lyfen.pear.project.tool.gen.util.VelocityUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-
 /**
  * 业务 服务层实现
  *
  * @author lyfen
  */
+@Slf4j
 @Service
-public class GenTableServiceImpl implements IGenTableService {
-    private static final Logger log = LoggerFactory.getLogger(GenTableServiceImpl.class);
+public class GenTableService {
 
     @Autowired
     private GenTableMapper genTableMapper;
@@ -54,7 +52,6 @@ public class GenTableServiceImpl implements IGenTableService {
      * @param id 业务ID
      * @return 业务信息
      */
-    @Override
     public GenTable selectGenTableById(Long id) {
         GenTable genTable = genTableMapper.selectGenTableById(id);
         setTableFromOptions(genTable);
@@ -67,7 +64,6 @@ public class GenTableServiceImpl implements IGenTableService {
      * @param genTable 业务信息
      * @return 业务集合
      */
-    @Override
     public List<GenTable> selectGenTableList(GenTable genTable) {
         return genTableMapper.selectGenTableList(genTable);
     }
@@ -98,7 +94,6 @@ public class GenTableServiceImpl implements IGenTableService {
      * @param genTable 业务信息
      * @return 结果
      */
-    @Override
     @Transactional
     public void updateGenTable(GenTable genTable) {
         String options = JSON.toJSONString(genTable.getParams());
@@ -117,7 +112,6 @@ public class GenTableServiceImpl implements IGenTableService {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    @Override
     @Transactional
     public void deleteGenTableByIds(Long[] tableIds) {
         genTableMapper.deleteGenTableByIds(tableIds);
@@ -129,7 +123,6 @@ public class GenTableServiceImpl implements IGenTableService {
      *
      * @param tableList 导入表列表
      */
-    @Override
     @Transactional
     public void importGenTable(List<GenTable> tableList) {
         String operName = SecurityUtils.getUsername();
@@ -187,7 +180,6 @@ public class GenTableServiceImpl implements IGenTableService {
      * @param tableName 表名称
      * @return 数据
      */
-    @Override
     public byte[] generatorCode(String tableName) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
@@ -202,7 +194,6 @@ public class GenTableServiceImpl implements IGenTableService {
      * @param tableNames 表数组
      * @return 数据
      */
-    @Override
     public byte[] generatorCode(String[] tableNames) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
