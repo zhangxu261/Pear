@@ -1,13 +1,12 @@
 package com.lyfen.pear.project.tool.gen.util;
 
-import java.util.Arrays;
-
 import com.lyfen.pear.common.constant.GenConstants;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.project.tool.gen.domain.GenTable;
 import com.lyfen.pear.project.tool.gen.domain.GenTableColumn;
 import org.apache.commons.lang3.RegExUtils;
-import com.lyfen.pear.framework.config.GenConfig;
+
+import java.util.Arrays;
 
 /**
  * 代码生成器 工具类
@@ -15,13 +14,15 @@ import com.lyfen.pear.framework.config.GenConfig;
  * @author lyfen
  */
 public class GenUtils {
+    private static final String PACKAGE_NAME = "com.lyfen.pear";
+
     /**
      * 初始化表信息
      */
     public static void initTable(GenTable genTable, String operName) {
         genTable.setClassName(convertClassName(genTable.getTableName()));
-        genTable.setPackageName(GenConfig.getPackageName());
-        genTable.setModuleName(getModuleName(GenConfig.getPackageName()));
+        genTable.setPackageName(PACKAGE_NAME);
+        genTable.setModuleName(getModuleName(PACKAGE_NAME));
         genTable.setBusinessName(getBusinessName(genTable.getTableName()));
         genTable.setFunctionName(replaceText(genTable.getTableComment()));
         genTable.setCreatedBy(operName);
@@ -140,12 +141,6 @@ public class GenUtils {
      * @return 类名
      */
     public static String convertClassName(String tableName) {
-        String tablePrefix = GenConfig.getTablePrefix();
-        if (StringUtils.isNotEmpty(tablePrefix)) {
-            String[] searchList = StringUtils.split(tablePrefix, ",");
-            String[] replacementList = emptyList(searchList.length);
-            tableName = StringUtils.replaceEach(tableName, searchList, replacementList);
-        }
         return StringUtils.convertToCamelCase(tableName);
     }
 
