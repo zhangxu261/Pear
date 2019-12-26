@@ -1,22 +1,18 @@
 package com.lyfen.pear.project.monitor.controller;
 
-import java.util.List;
-
 import com.lyfen.pear.common.utils.poi.ExcelUtil;
-import com.lyfen.pear.project.monitor.domain.SysLogininfor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
 import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
-import com.lyfen.pear.project.monitor.service.ISysLogininforService;
+import com.lyfen.pear.project.monitor.domain.SysLogininfor;
+import com.lyfen.pear.project.monitor.service.SysLogininforService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 系统访问记录
@@ -27,13 +23,13 @@ import com.lyfen.pear.project.monitor.service.ISysLogininforService;
 @RequestMapping("/monitor/logininfor")
 public class SysLogininforController extends BaseController {
     @Autowired
-    private ISysLogininforService logininforService;
+    private SysLogininforService sysLogininforService;
 
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysLogininfor logininfor) {
         startPage();
-        List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
+        List<SysLogininfor> list = sysLogininforService.selectLogininforList(logininfor);
         return getDataTable(list);
     }
 
@@ -41,7 +37,7 @@ public class SysLogininforController extends BaseController {
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:export')")
     @GetMapping("/export")
     public AjaxResult export(SysLogininfor logininfor) {
-        List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
+        List<SysLogininfor> list = sysLogininforService.selectLogininforList(logininfor);
         ExcelUtil<SysLogininfor> util = new ExcelUtil<SysLogininfor>(SysLogininfor.class);
         return util.exportExcel(list, "登陆日志");
     }
@@ -50,14 +46,14 @@ public class SysLogininforController extends BaseController {
     @Log(title = "登陆日志", businessType = BusinessType.DELETE)
     @DeleteMapping("/{infoIds}")
     public AjaxResult remove(@PathVariable Long[] infoIds) {
-        return toAjax(logininforService.deleteLogininforByIds(infoIds));
+        return toAjax(sysLogininforService.deleteLogininforByIds(infoIds));
     }
 
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
     @Log(title = "登陆日志", businessType = BusinessType.CLEAN)
     @DeleteMapping("/clean")
     public AjaxResult clean() {
-        logininforService.cleanLogininfor();
+        sysLogininforService.cleanLogininfor();
         return AjaxResult.success();
     }
 }

@@ -1,16 +1,15 @@
-package com.lyfen.pear.project.system.service.impl;
-
-import java.util.List;
+package com.lyfen.pear.project.system.service;
 
 import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.project.system.domain.SysDictType;
 import com.lyfen.pear.project.system.mapper.SysDictDataMapper;
 import com.lyfen.pear.project.system.mapper.SysDictTypeMapper;
-import com.lyfen.pear.project.system.service.ISysDictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 字典 业务层处理
@@ -18,12 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
  * @author lyfen
  */
 @Service
-public class SysDictTypeServiceImpl implements ISysDictTypeService {
+public class SysDictTypeService {
     @Autowired
-    private SysDictTypeMapper dictTypeMapper;
+    private SysDictTypeMapper sysDictTypeMapper;
 
     @Autowired
-    private SysDictDataMapper dictDataMapper;
+    private SysDictDataMapper sysDictDataMapper;
 
     /**
      * 根据条件分页查询字典类型
@@ -31,9 +30,8 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @param dictType 字典类型信息
      * @return 字典类型集合信息
      */
-    @Override
     public List<SysDictType> selectDictTypeList(SysDictType dictType) {
-        return dictTypeMapper.selectDictTypeList(dictType);
+        return sysDictTypeMapper.selectDictTypeList(dictType);
     }
 
     /**
@@ -41,9 +39,8 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      *
      * @return 字典类型集合信息
      */
-    @Override
     public List<SysDictType> selectDictTypeAll() {
-        return dictTypeMapper.selectDictTypeAll();
+        return sysDictTypeMapper.selectDictTypeAll();
     }
 
     /**
@@ -52,9 +49,8 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @param dictId 字典类型ID
      * @return 字典类型
      */
-    @Override
     public SysDictType selectDictTypeById(Long dictId) {
-        return dictTypeMapper.selectDictTypeById(dictId);
+        return sysDictTypeMapper.selectDictTypeById(dictId);
     }
 
     /**
@@ -64,7 +60,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @return 字典类型
      */
     public SysDictType selectDictTypeByType(String dictType) {
-        return dictTypeMapper.selectDictTypeByType(dictType);
+        return sysDictTypeMapper.selectDictTypeByType(dictType);
     }
 
     /**
@@ -73,9 +69,8 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @param dictId 字典ID
      * @return 结果
      */
-    @Override
     public int deleteDictTypeById(Long dictId) {
-        return dictTypeMapper.deleteDictTypeById(dictId);
+        return sysDictTypeMapper.deleteDictTypeById(dictId);
     }
 
     /**
@@ -85,7 +80,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @return 结果
      */
     public int deleteDictTypeByIds(Long[] dictIds) {
-        return dictTypeMapper.deleteDictTypeByIds(dictIds);
+        return sysDictTypeMapper.deleteDictTypeByIds(dictIds);
     }
 
     /**
@@ -94,9 +89,8 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @param dictType 字典类型信息
      * @return 结果
      */
-    @Override
     public int insertDictType(SysDictType dictType) {
-        return dictTypeMapper.insertDictType(dictType);
+        return sysDictTypeMapper.insertDictType(dictType);
     }
 
     /**
@@ -105,12 +99,11 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @param dictType 字典类型信息
      * @return 结果
      */
-    @Override
     @Transactional
     public int updateDictType(SysDictType dictType) {
-        SysDictType oldDict = dictTypeMapper.selectDictTypeById(dictType.getDictId());
-        dictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());
-        return dictTypeMapper.updateDictType(dictType);
+        SysDictType oldDict = sysDictTypeMapper.selectDictTypeById(dictType.getDictId());
+        sysDictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());
+        return sysDictTypeMapper.updateDictType(dictType);
     }
 
     /**
@@ -119,10 +112,9 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @param dict 字典类型
      * @return 结果
      */
-    @Override
     public String checkDictTypeUnique(SysDictType dict) {
         Long dictId = StringUtils.isNull(dict.getDictId()) ? -1L : dict.getDictId();
-        SysDictType dictType = dictTypeMapper.checkDictTypeUnique(dict.getDictType());
+        SysDictType dictType = sysDictTypeMapper.checkDictTypeUnique(dict.getDictType());
         if (StringUtils.isNotNull(dictType) && dictType.getDictId().longValue() != dictId.longValue()) {
             return UserConstants.NOT_UNIQUE;
         }

@@ -1,14 +1,13 @@
-package com.lyfen.pear.project.system.service.impl;
-
-import java.util.List;
+package com.lyfen.pear.project.system.service;
 
 import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.project.system.domain.SysConfig;
 import com.lyfen.pear.project.system.mapper.SysConfigMapper;
-import com.lyfen.pear.project.system.service.ISysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 参数配置 服务层实现
@@ -16,9 +15,9 @@ import org.springframework.stereotype.Service;
  * @author lyfen
  */
 @Service
-public class SysConfigServiceImpl implements ISysConfigService {
+public class SysConfigService {
     @Autowired
-    private SysConfigMapper configMapper;
+    private SysConfigMapper sysConfigMapper;
 
     /**
      * 查询参数配置信息
@@ -26,11 +25,10 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @param configId 参数配置ID
      * @return 参数配置信息
      */
-    @Override
     public SysConfig selectConfigById(Long configId) {
         SysConfig config = new SysConfig();
         config.setConfigId(configId);
-        return configMapper.selectConfig(config);
+        return sysConfigMapper.selectConfig(config);
     }
 
     /**
@@ -39,11 +37,10 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @param configKey 参数key
      * @return 参数键值
      */
-    @Override
     public String selectConfigByKey(String configKey) {
         SysConfig config = new SysConfig();
         config.setConfigKey(configKey);
-        SysConfig retConfig = configMapper.selectConfig(config);
+        SysConfig retConfig = sysConfigMapper.selectConfig(config);
         return StringUtils.isNotNull(retConfig) ? retConfig.getConfigValue() : "";
     }
 
@@ -53,9 +50,8 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @param config 参数配置信息
      * @return 参数配置集合
      */
-    @Override
     public List<SysConfig> selectConfigList(SysConfig config) {
-        return configMapper.selectConfigList(config);
+        return sysConfigMapper.selectConfigList(config);
     }
 
     /**
@@ -64,9 +60,8 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @param config 参数配置信息
      * @return 结果
      */
-    @Override
     public int insertConfig(SysConfig config) {
-        return configMapper.insertConfig(config);
+        return sysConfigMapper.insertConfig(config);
     }
 
     /**
@@ -75,9 +70,8 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @param config 参数配置信息
      * @return 结果
      */
-    @Override
     public int updateConfig(SysConfig config) {
-        return configMapper.updateConfig(config);
+        return sysConfigMapper.updateConfig(config);
     }
 
     /**
@@ -86,9 +80,8 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @param configId 参数ID
      * @return 结果
      */
-    @Override
     public int deleteConfigById(Long configId) {
-        return configMapper.deleteConfigById(configId);
+        return sysConfigMapper.deleteConfigById(configId);
     }
 
     /**
@@ -97,9 +90,8 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @param configIds 需要删除的参数ID
      * @return 结果
      */
-    @Override
     public int deleteConfigByIds(Long[] configIds) {
-        return configMapper.deleteConfigByIds(configIds);
+        return sysConfigMapper.deleteConfigByIds(configIds);
     }
 
     /**
@@ -108,10 +100,9 @@ public class SysConfigServiceImpl implements ISysConfigService {
      * @param config 参数配置信息
      * @return 结果
      */
-    @Override
     public String checkConfigKeyUnique(SysConfig config) {
         Long configId = StringUtils.isNull(config.getConfigId()) ? -1L : config.getConfigId();
-        SysConfig info = configMapper.checkConfigKeyUnique(config.getConfigKey());
+        SysConfig info = sysConfigMapper.checkConfigKeyUnique(config.getConfigKey());
         if (StringUtils.isNotNull(info) && info.getConfigId().longValue() != configId.longValue()) {
             return UserConstants.NOT_UNIQUE;
         }

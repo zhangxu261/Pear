@@ -1,13 +1,13 @@
 package com.lyfen.pear.framework.security.service;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.lyfen.pear.project.system.domain.SysUser;
-import com.lyfen.pear.project.system.service.ISysMenuService;
-import com.lyfen.pear.project.system.service.ISysRoleService;
+import com.lyfen.pear.project.system.service.SysMenuService;
+import com.lyfen.pear.project.system.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 用户权限处理
@@ -17,10 +17,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysPermissionService {
     @Autowired
-    private ISysRoleService roleService;
+    private SysRoleService roleService;
 
     @Autowired
-    private ISysMenuService menuService;
+    private SysMenuService menuService;
 
     /**
      * 获取角色数据权限

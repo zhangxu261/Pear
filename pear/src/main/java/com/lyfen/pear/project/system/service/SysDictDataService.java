@@ -1,12 +1,11 @@
-package com.lyfen.pear.project.system.service.impl;
-
-import java.util.List;
+package com.lyfen.pear.project.system.service;
 
 import com.lyfen.pear.project.system.domain.SysDictData;
 import com.lyfen.pear.project.system.mapper.SysDictDataMapper;
-import com.lyfen.pear.project.system.service.ISysDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 字典 业务层处理
@@ -14,9 +13,9 @@ import org.springframework.stereotype.Service;
  * @author lyfen
  */
 @Service
-public class SysDictDataServiceImpl implements ISysDictDataService {
+public class SysDictDataService {
     @Autowired
-    private SysDictDataMapper dictDataMapper;
+    private SysDictDataMapper sysDictDataMapper;
 
     /**
      * 根据条件分页查询字典数据
@@ -24,9 +23,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @param dictData 字典数据信息
      * @return 字典数据集合信息
      */
-    @Override
     public List<SysDictData> selectDictDataList(SysDictData dictData) {
-        return dictDataMapper.selectDictDataList(dictData);
+        return sysDictDataMapper.selectDictDataList(dictData);
     }
 
     /**
@@ -35,9 +33,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @param dictType 字典类型
      * @return 字典数据集合信息
      */
-    @Override
     public List<SysDictData> selectDictDataByType(String dictType) {
-        return dictDataMapper.selectDictDataByType(dictType);
+        return sysDictDataMapper.selectDictDataByType(dictType);
     }
 
     /**
@@ -47,9 +44,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @param dictValue 字典键值
      * @return 字典标签
      */
-    @Override
     public String selectDictLabel(String dictType, String dictValue) {
-        return dictDataMapper.selectDictLabel(dictType, dictValue);
+        return sysDictDataMapper.selectDictLabel(dictType, dictValue);
     }
 
     /**
@@ -58,9 +54,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @param dictCode 字典数据ID
      * @return 字典数据
      */
-    @Override
     public SysDictData selectDictDataById(Long dictCode) {
-        return dictDataMapper.selectDictDataById(dictCode);
+        return sysDictDataMapper.selectDictDataById(dictCode);
     }
 
     /**
@@ -69,9 +64,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @param dictCode 字典数据ID
      * @return 结果
      */
-    @Override
     public int deleteDictDataById(Long dictCode) {
-        return dictDataMapper.deleteDictDataById(dictCode);
+        return sysDictDataMapper.deleteDictDataById(dictCode);
     }
 
     /**
@@ -81,7 +75,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @return 结果
      */
     public int deleteDictDataByIds(Long[] dictCodes) {
-        return dictDataMapper.deleteDictDataByIds(dictCodes);
+        return sysDictDataMapper.deleteDictDataByIds(dictCodes);
     }
 
     /**
@@ -90,9 +84,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @param dictData 字典数据信息
      * @return 结果
      */
-    @Override
     public int insertDictData(SysDictData dictData) {
-        return dictDataMapper.insertDictData(dictData);
+        return sysDictDataMapper.insertDictData(dictData);
     }
 
     /**
@@ -101,8 +94,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
      * @param dictData 字典数据信息
      * @return 结果
      */
-    @Override
     public int updateDictData(SysDictData dictData) {
-        return dictDataMapper.updateDictData(dictData);
+        return sysDictDataMapper.updateDictData(dictData);
     }
 }

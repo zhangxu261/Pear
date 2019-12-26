@@ -1,28 +1,10 @@
 package com.lyfen.pear.project.system.controller;
 
-import java.util.List;
-
 import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.utils.SecurityUtils;
 import com.lyfen.pear.common.utils.ServletUtils;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.common.utils.poi.ExcelUtil;
-import com.lyfen.pear.project.system.domain.SysUser;
-import com.lyfen.pear.project.system.service.ISysPostService;
-import com.lyfen.pear.project.system.service.ISysRoleService;
-import com.lyfen.pear.project.system.service.ISysUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
 import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
 import com.lyfen.pear.framework.security.LoginUser;
@@ -30,6 +12,17 @@ import com.lyfen.pear.framework.security.service.TokenService;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
+import com.lyfen.pear.project.system.domain.SysUser;
+import com.lyfen.pear.project.system.service.SysPostService;
+import com.lyfen.pear.project.system.service.SysRoleService;
+import com.lyfen.pear.project.system.service.SysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * 用户信息
@@ -40,13 +33,13 @@ import com.lyfen.pear.framework.web.page.TableDataInfo;
 @RequestMapping("/system/user")
 public class SysUserController extends BaseController {
     @Autowired
-    private ISysUserService userService;
+    private SysUserService userService;
 
     @Autowired
-    private ISysRoleService roleService;
+    private SysRoleService roleService;
 
     @Autowired
-    private ISysPostService postService;
+    private SysPostService postService;
 
     @Autowired
     private TokenService tokenService;

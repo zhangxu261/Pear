@@ -1,22 +1,22 @@
 package com.lyfen.pear.project.system.controller;
 
-import java.util.List;
-import java.util.Set;
-
 import com.lyfen.pear.common.constant.Constants;
 import com.lyfen.pear.common.utils.ServletUtils;
-import com.lyfen.pear.project.system.domain.SysMenu;
-import com.lyfen.pear.project.system.domain.SysUser;
-import com.lyfen.pear.project.system.service.ISysMenuService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.lyfen.pear.framework.security.LoginUser;
 import com.lyfen.pear.framework.security.service.SysLoginService;
 import com.lyfen.pear.framework.security.service.SysPermissionService;
 import com.lyfen.pear.framework.security.service.TokenService;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
+import com.lyfen.pear.project.system.domain.SysMenu;
+import com.lyfen.pear.project.system.domain.SysUser;
+import com.lyfen.pear.project.system.service.SysMenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 登录验证
@@ -29,7 +29,7 @@ public class SysLoginController {
     private SysLoginService loginService;
 
     @Autowired
-    private ISysMenuService menuService;
+    private SysMenuService menuService;
 
     @Autowired
     private SysPermissionService permissionService;

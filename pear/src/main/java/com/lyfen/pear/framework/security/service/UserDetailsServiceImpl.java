@@ -3,8 +3,9 @@ package com.lyfen.pear.framework.security.service;
 import com.lyfen.pear.common.enums.UserStatus;
 import com.lyfen.pear.common.exception.BaseException;
 import com.lyfen.pear.common.utils.StringUtils;
+import com.lyfen.pear.framework.security.LoginUser;
 import com.lyfen.pear.project.system.domain.SysUser;
-import com.lyfen.pear.project.system.service.ISysUserService;
+import com.lyfen.pear.project.system.service.SysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.lyfen.pear.framework.security.LoginUser;
 
 /**
  * 用户验证处理
@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Autowired
-    private ISysUserService userService;
+    private SysUserService userService;
 
     @Autowired
     private SysPermissionService permissionService;

@@ -1,14 +1,9 @@
-package com.lyfen.pear.project.system.service.impl;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+package com.lyfen.pear.project.system.service;
 
 import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.exception.CustomException;
 import com.lyfen.pear.common.utils.StringUtils;
+import com.lyfen.pear.framework.aspectj.lang.annotation.DataScope;
 import com.lyfen.pear.project.system.domain.SysRole;
 import com.lyfen.pear.project.system.domain.SysRoleDept;
 import com.lyfen.pear.project.system.domain.SysRoleMenu;
@@ -16,11 +11,11 @@ import com.lyfen.pear.project.system.mapper.SysRoleDeptMapper;
 import com.lyfen.pear.project.system.mapper.SysRoleMapper;
 import com.lyfen.pear.project.system.mapper.SysRoleMenuMapper;
 import com.lyfen.pear.project.system.mapper.SysUserRoleMapper;
-import com.lyfen.pear.project.system.service.ISysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.lyfen.pear.framework.aspectj.lang.annotation.DataScope;
+
+import java.util.*;
 
 /**
  * 角色 业务层处理
@@ -28,7 +23,7 @@ import com.lyfen.pear.framework.aspectj.lang.annotation.DataScope;
  * @author lyfen
  */
 @Service
-public class SysRoleServiceImpl implements ISysRoleService {
+public class SysRoleService {
     @Autowired
     private SysRoleMapper roleMapper;
 
@@ -47,7 +42,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param role 角色信息
      * @return 角色数据集合信息
      */
-    @Override
     @DataScope(deptAlias = "d")
     public List<SysRole> selectRoleList(SysRole role) {
         return roleMapper.selectRoleList(role);
@@ -59,7 +53,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param userId 用户ID
      * @return 权限列表
      */
-    @Override
     public Set<String> selectRolePermissionByUserId(Long userId) {
         List<SysRole> perms = roleMapper.selectRolePermissionByUserId(userId);
         Set<String> permsSet = new HashSet<>();
@@ -106,7 +99,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param role 角色信息
      * @return 结果
      */
-    @Override
     public String checkRoleNameUnique(SysRole role) {
         Long roleId = StringUtils.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SysRole info = roleMapper.checkRoleNameUnique(role.getRoleName());
@@ -122,7 +114,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param role 角色信息
      * @return 结果
      */
-    @Override
     public String checkRoleKeyUnique(SysRole role) {
         Long roleId = StringUtils.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SysRole info = roleMapper.checkRoleKeyUnique(role.getRoleKey());
@@ -149,7 +140,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param roleId 角色ID
      * @return 结果
      */
-    @Override
     public int countUserRoleByRoleId(Long roleId) {
         return userRoleMapper.countUserRoleByRoleId(roleId);
     }
@@ -160,7 +150,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param role 角色信息
      * @return 结果
      */
-    @Override
     @Transactional
     public int insertRole(SysRole role) {
         // 新增角色信息
@@ -174,7 +163,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param role 角色信息
      * @return 结果
      */
-    @Override
     @Transactional
     public int updateRole(SysRole role) {
         // 修改角色信息
@@ -200,7 +188,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param role 角色信息
      * @return 结果
      */
-    @Override
     @Transactional
     public int authDataScope(SysRole role) {
         // 修改角色信息
@@ -259,7 +246,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @param roleId 角色ID
      * @return 结果
      */
-    @Override
     public int deleteRoleById(Long roleId) {
         return roleMapper.deleteRoleById(roleId);
     }

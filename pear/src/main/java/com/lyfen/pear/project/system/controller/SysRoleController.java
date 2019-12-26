@@ -1,28 +1,21 @@
 package com.lyfen.pear.project.system.controller;
 
-import java.util.List;
-
 import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.utils.SecurityUtils;
 import com.lyfen.pear.common.utils.poi.ExcelUtil;
-import com.lyfen.pear.project.system.domain.SysRole;
-import com.lyfen.pear.project.system.service.ISysRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
 import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
+import com.lyfen.pear.project.system.domain.SysRole;
+import com.lyfen.pear.project.system.service.SysRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 角色信息
@@ -33,7 +26,7 @@ import com.lyfen.pear.framework.web.page.TableDataInfo;
 @RequestMapping("/system/role")
 public class SysRoleController extends BaseController {
     @Autowired
-    private ISysRoleService roleService;
+    private SysRoleService roleService;
 
     @PreAuthorize("@ss.hasPermi('system:role:list')")
     @GetMapping("/list")

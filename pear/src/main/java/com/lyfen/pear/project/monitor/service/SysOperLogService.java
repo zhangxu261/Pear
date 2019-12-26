@@ -1,12 +1,11 @@
-package com.lyfen.pear.project.monitor.service.impl;
-
-import java.util.List;
+package com.lyfen.pear.project.monitor.service;
 
 import com.lyfen.pear.project.monitor.domain.SysOperLog;
 import com.lyfen.pear.project.monitor.mapper.SysOperLogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.lyfen.pear.project.monitor.service.ISysOperLogService;
+
+import java.util.List;
 
 /**
  * 操作日志 服务层处理
@@ -14,18 +13,17 @@ import com.lyfen.pear.project.monitor.service.ISysOperLogService;
  * @author lyfen
  */
 @Service
-public class SysOperLogServiceImpl implements ISysOperLogService {
+public class SysOperLogService {
     @Autowired
-    private SysOperLogMapper operLogMapper;
+    private SysOperLogMapper sysOperLogMapper;
 
     /**
      * 新增操作日志
      *
      * @param operLog 操作日志对象
      */
-    @Override
     public void insertOperlog(SysOperLog operLog) {
-        operLogMapper.insertOperlog(operLog);
+        sysOperLogMapper.insertOperlog(operLog);
     }
 
     /**
@@ -34,9 +32,8 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
      * @param operLog 操作日志对象
      * @return 操作日志集合
      */
-    @Override
     public List<SysOperLog> selectOperLogList(SysOperLog operLog) {
-        return operLogMapper.selectOperLogList(operLog);
+        return sysOperLogMapper.selectOperLogList(operLog);
     }
 
     /**
@@ -46,7 +43,7 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
      * @return 结果
      */
     public int deleteOperLogByIds(Long[] operIds) {
-        return operLogMapper.deleteOperLogByIds(operIds);
+        return sysOperLogMapper.deleteOperLogByIds(operIds);
     }
 
     /**
@@ -55,16 +52,14 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
      * @param operId 操作ID
      * @return 操作日志对象
      */
-    @Override
     public SysOperLog selectOperLogById(Long operId) {
-        return operLogMapper.selectOperLogById(operId);
+        return sysOperLogMapper.selectOperLogById(operId);
     }
 
     /**
      * 清空操作日志
      */
-    @Override
     public void cleanOperLog() {
-        operLogMapper.cleanOperLog();
+        sysOperLogMapper.cleanOperLog();
     }
 }

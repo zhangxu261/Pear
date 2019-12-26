@@ -1,7 +1,5 @@
 package com.lyfen.pear.framework.manager.factory;
 
-import java.util.TimerTask;
-
 import com.lyfen.pear.common.constant.Constants;
 import com.lyfen.pear.common.utils.LogUtils;
 import com.lyfen.pear.common.utils.ServletUtils;
@@ -10,11 +8,13 @@ import com.lyfen.pear.common.utils.ip.IpUtils;
 import com.lyfen.pear.common.utils.spring.SpringUtils;
 import com.lyfen.pear.project.monitor.domain.SysLogininfor;
 import com.lyfen.pear.project.monitor.domain.SysOperLog;
-import com.lyfen.pear.project.monitor.service.ISysLogininforService;
-import com.lyfen.pear.project.monitor.service.ISysOperLogService;
+import com.lyfen.pear.project.monitor.service.SysLogininforService;
+import com.lyfen.pear.project.monitor.service.SysOperLogService;
+import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import eu.bitwalker.useragentutils.UserAgent;
+
+import java.util.TimerTask;
 
 /**
  * 异步工厂（产生任务用）
@@ -68,7 +68,7 @@ public class AsyncFactory {
                     logininfor.setStatus(Constants.FAIL);
                 }
                 // 插入数据
-                SpringUtils.getBean(ISysLogininforService.class).insertLogininfor(logininfor);
+                SpringUtils.getBean(SysLogininforService.class).insertLogininfor(logininfor);
             }
         };
     }
@@ -85,7 +85,7 @@ public class AsyncFactory {
             public void run() {
                 // 远程查询操作地点
                 operLog.setOperLocation(AddressUtils.getRealAddressByIP(operLog.getOperIp()));
-                SpringUtils.getBean(ISysOperLogService.class).insertOperlog(operLog);
+                SpringUtils.getBean(SysOperLogService.class).insertOperlog(operLog);
             }
         };
     }
