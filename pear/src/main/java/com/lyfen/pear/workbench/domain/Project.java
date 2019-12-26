@@ -34,18 +34,14 @@ public class Project implements Serializable {
     private Integer estimateTime;
 
     @ApiModelProperty("创建人")
-    @TableField(fill = FieldFill.INSERT)
     private String createdBy;
 
     @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty("更新人")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updatedBy;
 
     @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 }

@@ -10,23 +10,26 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
-@ApiModel("部门成员")
+@ApiModel("任务工时")
 @Data
-@TableName("pear_department_member")
-public class DepartmentMember implements Serializable {
+@TableName("pear_task_work")
+public class TaskWork implements Serializable {
 
     @ApiModelProperty("主键ID")
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty("部门编号")
-    private String departmentCode;
+    @ApiModelProperty("任务编号")
+    private String taskCode;
 
     @ApiModelProperty("成员编号")
     private String memberCode;
 
-    @ApiModelProperty("是否领导")
-    private Boolean leader;
+    @ApiModelProperty("工作日志")
+    private String workLog;
+
+    @ApiModelProperty("工时")
+    private Integer workTime;
 
     @ApiModelProperty("创建人")
     private String createdBy;

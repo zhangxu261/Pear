@@ -18,23 +18,29 @@ public class Task implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty("项目编号")
-    private String projectCode;
-
     @ApiModelProperty("任务编号")
     private String code;
+
+    @ApiModelProperty("项目编号")
+    private String projectCode;
 
     @ApiModelProperty("父级任务")
     private Long parentCode;
 
-    @ApiModelProperty("任务名称")
-    private String name;
+    @ApiModelProperty("任务主题")
+    private String subject;
 
     @ApiModelProperty("任务描述")
     private String description;
 
     @ApiModelProperty("任务进度")
     private Float schedule;
+
+    @ApiModelProperty("任务类型")
+    private Integer type;
+
+    @ApiModelProperty("任务状态")
+    private Integer status;
 
     @ApiModelProperty("预估工时")
     private Integer estimateTime;
@@ -46,18 +52,14 @@ public class Task implements Serializable {
     private String assignee;
 
     @ApiModelProperty("创建人")
-    @TableField(fill = FieldFill.INSERT)
     private String createdBy;
 
     @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty("更新人")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updatedBy;
 
     @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 }
