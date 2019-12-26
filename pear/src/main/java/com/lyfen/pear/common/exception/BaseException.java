@@ -1,8 +1,5 @@
 package com.lyfen.pear.common.exception;
 
-import com.lyfen.pear.common.utils.MessageUtils;
-import com.lyfen.pear.common.utils.StringUtils;
-
 /**
  * 基础异常
  *
@@ -56,14 +53,7 @@ public class BaseException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        String message = null;
-        if (!StringUtils.isEmpty(code)) {
-            message = MessageUtils.message(code, args);
-        }
-        if (message == null) {
-            message = defaultMessage;
-        }
-        return message;
+        return defaultMessage;
     }
 
     public String getModule() {
