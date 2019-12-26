@@ -58,7 +58,7 @@ spring:
   # redis 配置
   redis:
     # 地址
-    host: 106.54.131.59
+    host: localhost
     # 端口，默认为6379
     port: 6379
     # 连接超时时间
