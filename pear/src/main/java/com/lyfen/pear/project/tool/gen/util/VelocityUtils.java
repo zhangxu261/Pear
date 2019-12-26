@@ -1,16 +1,17 @@
 package com.lyfen.pear.project.tool.gen.util;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.lyfen.pear.common.constant.GenConstants;
 import com.lyfen.pear.common.utils.DateUtils;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.project.tool.gen.domain.GenTable;
 import com.lyfen.pear.project.tool.gen.domain.GenTableColumn;
 import org.apache.velocity.VelocityContext;
-import com.alibaba.fastjson.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class VelocityUtils {
     /**
@@ -117,23 +118,23 @@ public class VelocityUtils {
         String vuePath = "vue";
 
         if (template.contains("domain.java.vm")) {
-            fileName = StringUtils.format("{}/domain/{}.java", javaPath, className);
+            fileName = StrUtil.format("{}/domain/{}.java", javaPath, className);
         } else if (template.contains("mapper.java.vm")) {
-            fileName = StringUtils.format("{}/mapper/{}Mapper.java", javaPath, className);
+            fileName = StrUtil.format("{}/mapper/{}Mapper.java", javaPath, className);
         } else if (template.contains("service.java.vm")) {
-            fileName = StringUtils.format("{}/service/I{}Service.java", javaPath, className);
+            fileName = StrUtil.format("{}/service/I{}Service.java", javaPath, className);
         } else if (template.contains("serviceImpl.java.vm")) {
-            fileName = StringUtils.format("{}/service/impl/{}ServiceImpl.java", javaPath, className);
+            fileName = StrUtil.format("{}/service/impl/{}ServiceImpl.java", javaPath, className);
         } else if (template.contains("controller.java.vm")) {
-            fileName = StringUtils.format("{}/controller/{}Controller.java", javaPath, className);
+            fileName = StrUtil.format("{}/controller/{}Controller.java", javaPath, className);
         } else if (template.contains("mapper.xml.vm")) {
-            fileName = StringUtils.format("{}/{}Mapper.xml", mybatisPath, className);
+            fileName = StrUtil.format("{}/{}Mapper.xml", mybatisPath, className);
         } else if (template.contains("sql.vm")) {
             fileName = businessName + "Menu.sql";
         } else if (template.contains("js.vm")) {
-            fileName = StringUtils.format("{}/api/{}/{}.js", vuePath, moduleName, businessName);
+            fileName = StrUtil.format("{}/api/{}/{}.js", vuePath, moduleName, businessName);
         } else if (template.contains("vue.vm")) {
-            fileName = StringUtils.format("{}/views/{}/{}/index.vue", vuePath, moduleName, businessName);
+            fileName = StrUtil.format("{}/views/{}/{}/index.vue", vuePath, moduleName, businessName);
         }
         return fileName;
     }
@@ -176,7 +177,7 @@ public class VelocityUtils {
      * @return 返回权限前缀
      */
     public static String getPermissionPrefix(String moduleName, String businessName) {
-        return StringUtils.format("{}:{}", moduleName, businessName);
+        return StrUtil.format("{}:{}", moduleName, businessName);
 
     }
 
