@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @ApiModel("部门")
@@ -35,11 +36,11 @@ public class Department implements Serializable {
     private String createdBy;
 
     @ApiModelProperty("创建时间")
-    private Date createdTime;
+    private LocalDateTime createdTime;
 
     @ApiModelProperty("更新人")
     private String updatedBy;
 
     @ApiModelProperty("更新时间")
-    private Date updatedTime;
+    private LocalDateTime updatedTime;
 }
