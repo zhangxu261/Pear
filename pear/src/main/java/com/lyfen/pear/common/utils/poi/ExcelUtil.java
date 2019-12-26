@@ -1,10 +1,10 @@
 package com.lyfen.pear.common.utils.poi;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.ReflectUtil;
 import com.lyfen.pear.common.exception.CustomException;
 import com.lyfen.pear.common.utils.DateUtils;
 import com.lyfen.pear.common.utils.StringUtils;
-import com.lyfen.pear.common.utils.reflect.ReflectUtils;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excel;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excel.ColumnType;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excel.Type;
@@ -203,7 +203,7 @@ public class ExcelUtil<T> {
                         } else if (StringUtils.isNotEmpty(attr.readConverterExp())) {
                             val = reverseByExp(String.valueOf(val), attr.readConverterExp());
                         }
-                        ReflectUtils.invokeSetter(entity, propertyName, val);
+                        ReflectUtil.setFieldValue(entity, propertyName, val);
                     }
                 }
                 list.add(entity);

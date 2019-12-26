@@ -1,18 +1,18 @@
 package com.lyfen.pear.common.utils.file;
 
-import java.io.File;
-import java.io.IOException;
-
-import com.lyfen.pear.common.utils.DateUtils;
-import com.lyfen.pear.common.utils.StringUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.web.multipart.MultipartFile;
+import cn.hutool.crypto.SecureUtil;
 import com.lyfen.pear.common.constant.Constants;
 import com.lyfen.pear.common.exception.file.FileNameLengthLimitExceededException;
 import com.lyfen.pear.common.exception.file.FileSizeLimitExceededException;
 import com.lyfen.pear.common.exception.file.InvalidExtensionException;
-import com.lyfen.pear.common.utils.security.Md5Utils;
+import com.lyfen.pear.common.utils.DateUtils;
+import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.framework.config.PearConfig;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * 文件上传工具类
@@ -140,7 +140,7 @@ public class FileUploadUtils {
      */
     private static final String encodingFilename(String fileName) {
         fileName = fileName.replace("_", " ");
-        fileName = Md5Utils.hash(fileName + System.nanoTime() + counter++);
+        fileName = SecureUtil.md5(fileName + System.nanoTime() + counter++);
         return fileName;
     }
 
