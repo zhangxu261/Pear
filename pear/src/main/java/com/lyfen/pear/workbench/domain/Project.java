@@ -33,9 +33,6 @@ public class Project implements Serializable {
     @ApiModelProperty("预估工时")
     private Integer estimateTime;
 
-    @ApiModelProperty("负责人")
-    private String leader;
-
     @ApiModelProperty("创建人")
     @TableField(fill = FieldFill.INSERT)
     private String createdBy;
