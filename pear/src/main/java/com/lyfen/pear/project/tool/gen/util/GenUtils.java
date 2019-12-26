@@ -24,7 +24,6 @@ public class GenUtils {
         genTable.setModuleName(getModuleName(GenConfig.getPackageName()));
         genTable.setBusinessName(getBusinessName(genTable.getTableName()));
         genTable.setFunctionName(replaceText(genTable.getTableComment()));
-        genTable.setFunctionAuthor(GenConfig.getAuthor());
         genTable.setCreatedBy(operName);
     }
 
@@ -141,9 +140,8 @@ public class GenUtils {
      * @return 类名
      */
     public static String convertClassName(String tableName) {
-        boolean autoRemovePre = GenConfig.getAutoRemovePre();
         String tablePrefix = GenConfig.getTablePrefix();
-        if (autoRemovePre && StringUtils.isNotEmpty(tablePrefix)) {
+        if (StringUtils.isNotEmpty(tablePrefix)) {
             String[] searchList = StringUtils.split(tablePrefix, ",");
             String[] replacementList = emptyList(searchList.length);
             tableName = StringUtils.replaceEach(tableName, searchList, replacementList);
@@ -154,11 +152,11 @@ public class GenUtils {
     /**
      * 关键字替换
      *
-     * @param name 需要被替换的名字
+     * @param text 需要被替换的名字
      * @return 替换后的名字
      */
     public static String replaceText(String text) {
-        return RegExUtils.replaceAll(text, "(?:表|若依)", "");
+        return RegExUtils.replaceAll(text, "(?:表)", "");
     }
 
     /**

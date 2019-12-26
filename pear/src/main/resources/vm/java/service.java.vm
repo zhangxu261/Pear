@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * ${functionName}Service接口
  * 
- * @author ${author}
+ * @author lyfen
  * @date ${datetime}
  */
 public interface I${ClassName}Service 
