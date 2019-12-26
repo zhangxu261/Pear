@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.apache.ibatis.io.VFS;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,7 @@ import org.springframework.util.ClassUtils;
  * @author lyfen
  */
 @Configuration
+@MapperScan("com.lyfen.pear.project.**.mapper")
 public class MyBatisConfig {
     @Autowired
     private Environment env;
