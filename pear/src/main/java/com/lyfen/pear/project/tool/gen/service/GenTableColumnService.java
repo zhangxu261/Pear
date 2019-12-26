@@ -1,12 +1,12 @@
 package com.lyfen.pear.project.tool.gen.service;
 
-import java.util.List;
-
-import com.lyfen.pear.common.utils.text.Convert;
+import cn.hutool.core.convert.Convert;
 import com.lyfen.pear.project.tool.gen.domain.GenTableColumn;
 import com.lyfen.pear.project.tool.gen.mapper.GenTableColumnMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 业务字段 服务层实现

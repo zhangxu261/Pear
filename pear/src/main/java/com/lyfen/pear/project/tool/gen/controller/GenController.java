@@ -1,6 +1,6 @@
 package com.lyfen.pear.project.tool.gen.controller;
 
-import com.lyfen.pear.common.utils.text.Convert;
+import cn.hutool.core.convert.Convert;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
 import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
 import com.lyfen.pear.framework.web.controller.BaseController;

@@ -1,25 +1,25 @@
 package com.lyfen.pear.framework.security.service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import javax.servlet.http.HttpServletRequest;
-
+import cn.hutool.core.util.IdUtil;
 import com.lyfen.pear.common.constant.Constants;
-import com.lyfen.pear.common.utils.IdUtils;
 import com.lyfen.pear.common.utils.ServletUtils;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.common.utils.ip.AddressUtils;
 import com.lyfen.pear.common.utils.ip.IpUtils;
 import com.lyfen.pear.framework.redis.RedisCache;
 import com.lyfen.pear.framework.security.LoginUser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * token验证处理
@@ -95,7 +95,7 @@ public class TokenService {
      * @return 令牌
      */
     public String createToken(LoginUser loginUser) {
-        String token = IdUtils.fastUUID();
+        String token = IdUtil.fastUUID();
         loginUser.setToken(token);
         setUserAgent(loginUser);
         refreshToken(loginUser);
