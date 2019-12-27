@@ -2,7 +2,7 @@ package com.lyfen.pear.mapper.system;
 
 import java.util.List;
 
-import com.lyfen.pear.project.system.domain.SysUserRole;
+import com.lyfen.pear.domain.system.SysUserRole;
 import org.apache.ibatis.annotations.Param;
 
 /**

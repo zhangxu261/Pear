@@ -1,6 +1,6 @@
 package com.lyfen.pear.service.system;
 
-import com.lyfen.pear.project.system.domain.SysDictData;
+import com.lyfen.pear.domain.system.SysDictData;
 import com.lyfen.pear.mapper.system.SysDictDataMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

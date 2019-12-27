@@ -2,7 +2,7 @@ package com.lyfen.pear.mapper.system;
 
 import java.util.List;
 
-import com.lyfen.pear.project.system.domain.SysNotice;
+import com.lyfen.pear.domain.system.SysNotice;
 
 /**
  * 通知公告表 数据层

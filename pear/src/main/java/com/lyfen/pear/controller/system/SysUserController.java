@@ -12,7 +12,7 @@ import com.lyfen.pear.framework.security.service.TokenService;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
-import com.lyfen.pear.project.system.domain.SysUser;
+import com.lyfen.pear.domain.system.SysUser;
 import com.lyfen.pear.service.system.SysRoleService;
 import com.lyfen.pear.service.system.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package com.lyfen.pear.mapper.system;
 
 import java.util.List;
 
-import com.lyfen.pear.project.system.domain.SysRole;
+import com.lyfen.pear.domain.system.SysRole;
 
 /**
  * 角色表 数据层

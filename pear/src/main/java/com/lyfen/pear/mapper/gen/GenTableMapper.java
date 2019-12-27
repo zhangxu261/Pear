@@ -2,10 +2,9 @@ package com.lyfen.pear.mapper.gen;
 
 import java.util.List;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.lyfen.pear.project.tool.gen.domain.GenTable;
+import com.lyfen.pear.domain.gen.GenTable;
 import org.apache.ibatis.annotations.Param;
 
 /**

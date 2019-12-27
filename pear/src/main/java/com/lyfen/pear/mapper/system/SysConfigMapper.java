@@ -2,7 +2,7 @@ package com.lyfen.pear.mapper.system;
 
 import java.util.List;
 
-import com.lyfen.pear.project.system.domain.SysConfig;
+import com.lyfen.pear.domain.system.SysConfig;
 
 /**
  * 参数配置 数据层

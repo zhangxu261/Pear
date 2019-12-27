@@ -2,7 +2,7 @@ package com.lyfen.pear.service.system;
 
 import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.utils.StringUtils;
-import com.lyfen.pear.project.system.domain.SysConfig;
+import com.lyfen.pear.domain.system.SysConfig;
 import com.lyfen.pear.mapper.system.SysConfigMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

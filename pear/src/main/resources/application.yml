@@ -71,7 +71,7 @@ token:
 mybatis-plus:
   mapper-locations: classpath*:mybatis/**/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  type-aliases-package: com.lyfen.pear
+  type-aliases-package: com.lyfen.pear.domain
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false

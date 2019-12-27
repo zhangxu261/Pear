@@ -2,7 +2,7 @@ package com.lyfen.pear.mapper.gen;
 
 import java.util.List;
 
-import com.lyfen.pear.project.tool.gen.domain.GenTableColumn;
+import com.lyfen.pear.domain.gen.GenTableColumn;
 
 /**
  * 业务字段 数据层

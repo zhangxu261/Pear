@@ -1,4 +1,4 @@
-package com.lyfen.pear.project.system.domain;
+package com.lyfen.pear.domain.system;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.lyfen.pear.project.monitor.domain;
+package com.lyfen.pear.domain.monitor;
 
 import java.util.Date;
 

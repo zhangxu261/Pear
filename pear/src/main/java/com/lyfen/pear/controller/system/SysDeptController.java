@@ -6,7 +6,7 @@ import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
 import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
-import com.lyfen.pear.project.system.domain.SysDept;
+import com.lyfen.pear.domain.system.SysDept;
 import com.lyfen.pear.service.system.SysDeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

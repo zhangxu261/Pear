@@ -2,7 +2,7 @@ package com.lyfen.pear.mapper.system;
 
 import java.util.List;
 
-import com.lyfen.pear.project.system.domain.SysRoleMenu;
+import com.lyfen.pear.domain.system.SysRoleMenu;
 
 /**
  * 角色与菜单关联表 数据层

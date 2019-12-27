@@ -1,9 +1,9 @@
-package com.lyfen.pear.project.tool.gen.util;
+package com.lyfen.pear.common.utils.gen;
 
 import com.lyfen.pear.common.constant.GenConstants;
 import com.lyfen.pear.common.utils.StringUtils;
-import com.lyfen.pear.project.tool.gen.domain.GenTable;
-import com.lyfen.pear.project.tool.gen.domain.GenTableColumn;
+import com.lyfen.pear.domain.gen.GenTable;
+import com.lyfen.pear.domain.gen.GenTableColumn;
 import org.apache.commons.lang3.RegExUtils;
 
 import java.util.Arrays;

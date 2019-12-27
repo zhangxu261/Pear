@@ -1,4 +1,4 @@
-package com.lyfen.pear.project.system.domain;
+package com.lyfen.pear.domain.system;
 
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excel;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excel.ColumnType;

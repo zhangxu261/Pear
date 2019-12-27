@@ -2,7 +2,7 @@ package com.lyfen.pear.mapper.monitor;
 
 import java.util.List;
 
-import com.lyfen.pear.project.monitor.domain.SysOperLog;
+import com.lyfen.pear.domain.monitor.SysOperLog;
 
 /**
  * 操作日志 数据层

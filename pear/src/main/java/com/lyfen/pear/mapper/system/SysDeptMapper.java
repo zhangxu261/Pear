@@ -3,7 +3,7 @@ package com.lyfen.pear.mapper.system;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import com.lyfen.pear.project.system.domain.SysDept;
+import com.lyfen.pear.domain.system.SysDept;
 
 /**
  * 部门管理 数据层

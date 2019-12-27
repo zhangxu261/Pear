@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.lyfen.pear.project.system.domain.SysDept;
-import com.lyfen.pear.project.system.domain.SysMenu;
+import com.lyfen.pear.domain.system.SysDept;
+import com.lyfen.pear.domain.system.SysMenu;
 
 /**
  * Treeselect树结构实体类

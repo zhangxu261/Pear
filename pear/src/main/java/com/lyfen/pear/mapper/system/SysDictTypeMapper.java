@@ -2,7 +2,7 @@ package com.lyfen.pear.mapper.system;
 
 import java.util.List;
 
-import com.lyfen.pear.project.system.domain.SysDictType;
+import com.lyfen.pear.domain.system.SysDictType;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

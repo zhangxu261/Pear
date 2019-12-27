@@ -1,4 +1,4 @@
-package com.lyfen.pear.project.tool.gen.domain;
+package com.lyfen.pear.domain.gen;
 
 import javax.validation.constraints.NotBlank;
 

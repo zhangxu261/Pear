@@ -1,7 +1,7 @@
 package com.lyfen.pear.service.gen;
 
 import cn.hutool.core.convert.Convert;
-import com.lyfen.pear.project.tool.gen.domain.GenTableColumn;
+import com.lyfen.pear.domain.gen.GenTableColumn;
 import com.lyfen.pear.mapper.gen.GenTableColumnMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

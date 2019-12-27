@@ -1,6 +1,6 @@
 package com.lyfen.pear.service.monitor;
 
-import com.lyfen.pear.project.monitor.domain.SysLogininfor;
+import com.lyfen.pear.domain.monitor.SysLogininfor;
 import com.lyfen.pear.mapper.monitor.SysLogininforMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

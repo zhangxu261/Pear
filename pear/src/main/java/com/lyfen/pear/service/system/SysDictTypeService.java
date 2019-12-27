@@ -2,7 +2,7 @@ package com.lyfen.pear.service.system;
 
 import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.utils.StringUtils;
-import com.lyfen.pear.project.system.domain.SysDictType;
+import com.lyfen.pear.domain.system.SysDictType;
 import com.lyfen.pear.mapper.system.SysDictDataMapper;
 import com.lyfen.pear.mapper.system.SysDictTypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;

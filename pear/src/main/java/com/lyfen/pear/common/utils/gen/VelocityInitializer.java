@@ -1,4 +1,4 @@
-package com.lyfen.pear.project.tool.gen.util;
+package com.lyfen.pear.common.utils.gen;
 
 import java.util.Properties;
 

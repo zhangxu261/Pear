@@ -4,7 +4,7 @@ import com.lyfen.pear.common.enums.UserStatus;
 import com.lyfen.pear.common.exception.BaseException;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.framework.security.LoginUser;
-import com.lyfen.pear.project.system.domain.SysUser;
+import com.lyfen.pear.domain.system.SysUser;
 import com.lyfen.pear.service.system.SysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

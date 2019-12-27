@@ -1,4 +1,4 @@
-package com.lyfen.pear.project.system.domain.vo;
+package com.lyfen.pear.domain.system.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

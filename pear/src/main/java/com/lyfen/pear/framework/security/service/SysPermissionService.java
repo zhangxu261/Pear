@@ -1,6 +1,6 @@
 package com.lyfen.pear.framework.security.service;
 
-import com.lyfen.pear.project.system.domain.SysUser;
+import com.lyfen.pear.domain.system.SysUser;
 import com.lyfen.pear.service.system.SysMenuService;
 import com.lyfen.pear.service.system.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;

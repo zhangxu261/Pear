@@ -1,6 +1,6 @@
 package com.lyfen.pear.mapper.system;
 
-import com.lyfen.pear.project.system.domain.SysUser;
+import com.lyfen.pear.domain.system.SysUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
