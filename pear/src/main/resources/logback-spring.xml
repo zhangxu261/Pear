@@ -35,7 +35,6 @@
 
     <logger name="com.lyfen.pear" level="info"/>
     <logger name="org.apache.ibatis" level="debug"/>
-    <logger name="org.mybatis.spring" level="debug"/>
     <logger name="org.springframework" level="warn"/>
 
     <root level="INFO">

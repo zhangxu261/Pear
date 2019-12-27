@@ -14,7 +14,7 @@ import java.util.Arrays;
  * @author lyfen
  */
 public class GenUtils {
-    private static final String PACKAGE_NAME = "com.lyfen.pear";
+    private static final String PACKAGE_NAME = "com.lyfen.pear.workbench";
 
     /**
      * 初始化表信息

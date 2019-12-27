@@ -8,26 +8,23 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@ApiModel("部门")
+@ApiModel("团队成员")
 @Data
-@TableName("pear_department")
-public class Department implements Serializable {
+@TableName("pear_team_member")
+public class TeamMember implements Serializable {
 
     @ApiModelProperty("主键ID")
     @TableId(type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty("部门编号")
-    private String code;
+    private String teamId;
 
-    @ApiModelProperty("部门名称")
-    private String name;
+    @ApiModelProperty("成员编号")
+    private String memberCode;
 
-    @ApiModelProperty("父级部门编号")
-    private String parentCode;
-
-    @ApiModelProperty("排序")
-    private Integer sort;
+    @ApiModelProperty("是否领导")
+    private Boolean leader;
 
     @ApiModelProperty("创建人")
     @TableField(fill = FieldFill.INSERT)

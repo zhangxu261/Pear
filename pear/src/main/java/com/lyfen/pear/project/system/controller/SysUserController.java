@@ -13,7 +13,6 @@ import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
 import com.lyfen.pear.project.system.domain.SysUser;
-import com.lyfen.pear.project.system.service.SysPostService;
 import com.lyfen.pear.project.system.service.SysRoleService;
 import com.lyfen.pear.project.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +36,6 @@ public class SysUserController extends BaseController {
 
     @Autowired
     private SysRoleService roleService;
-
-    @Autowired
-    private SysPostService postService;
 
     @Autowired
     private TokenService tokenService;
@@ -90,10 +86,8 @@ public class SysUserController extends BaseController {
     public AjaxResult getInfo(@PathVariable(value = "userId", required = false) Long userId) {
         AjaxResult ajax = AjaxResult.success();
         ajax.put("roles", roleService.selectRoleAll());
-        ajax.put("posts", postService.selectPostAll());
         if (StringUtils.isNotNull(userId)) {
             ajax.put(AjaxResult.DATA_TAG, userService.selectUserById(userId));
-            ajax.put("postIds", postService.selectPostListByUserId(userId));
             ajax.put("roleIds", roleService.selectRoleListByUserId(userId));
         }
         return ajax;

@@ -1,18 +1,16 @@
 package com.lyfen.pear.project.system.domain;
 
-import java.util.Date;
-import java.util.List;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excel;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excel.ColumnType;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excel.Type;
 import com.lyfen.pear.framework.aspectj.lang.annotation.Excels;
 import com.lyfen.pear.framework.web.domain.BaseEntity;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 用户对象 sys_user
@@ -120,11 +118,6 @@ public class SysUser extends BaseEntity {
      * 角色组
      */
     private Long[] roleIds;
-
-    /**
-     * 岗位组
-     */
-    private Long[] postIds;
 
     public SysUser() {
 
@@ -284,37 +277,4 @@ public class SysUser extends BaseEntity {
         this.roleIds = roleIds;
     }
 
-    public Long[] getPostIds() {
-        return postIds;
-    }
-
-    public void setPostIds(Long[] postIds) {
-        this.postIds = postIds;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("userId", getUserId())
-                .append("deptId", getDeptId())
-                .append("userName", getUserName())
-                .append("nickName", getNickName())
-                .append("email", getEmail())
-                .append("phonenumber", getPhonenumber())
-                .append("sex", getSex())
-                .append("avatar", getAvatar())
-                .append("password", getPassword())
-                .append("salt", getSalt())
-                .append("status", getStatus())
-                .append("delFlag", getDelFlag())
-                .append("loginIp", getLoginIp())
-                .append("loginDate", getLoginDate())
-                .append("createdBy", getCreatedBy())
-                .append("createdTime", getCreatedTime())
-                .append("updatedBy", getUpdatedBy())
-                .append("updatedTime", getUpdatedTime())
-                .append("remark", getRemark())
-                .append("dept", getDept())
-                .toString();
-    }
 }
