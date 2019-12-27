@@ -3,14 +3,12 @@ package com.lyfen.pear.controller.system;
 import com.lyfen.pear.common.utils.SecurityUtils;
 import com.lyfen.pear.common.utils.ServletUtils;
 import com.lyfen.pear.common.utils.file.FileUploadUtils;
-import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
-import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
+import com.lyfen.pear.domain.system.SysUser;
 import com.lyfen.pear.framework.config.PearConfig;
 import com.lyfen.pear.framework.security.LoginUser;
 import com.lyfen.pear.framework.security.service.TokenService;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
-import com.lyfen.pear.domain.system.SysUser;
 import com.lyfen.pear.service.system.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +45,6 @@ public class SysProfileController extends BaseController {
     /**
      * 修改用户
      */
-    @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult updateProfile(@RequestBody SysUser user) {
         return toAjax(userService.updateUserProfile(user));
@@ -56,7 +53,6 @@ public class SysProfileController extends BaseController {
     /**
      * 重置密码
      */
-    @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PutMapping("/updatePwd")
     public AjaxResult updatePwd(String oldPassword, String newPassword) {
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
@@ -74,7 +70,6 @@ public class SysProfileController extends BaseController {
     /**
      * 头像上传
      */
-    @Log(title = "用户头像", businessType = BusinessType.UPDATE)
     @PostMapping("/avatar")
     public AjaxResult avatar(@RequestParam("avatarfile") MultipartFile file) throws IOException {
         if (!file.isEmpty()) {

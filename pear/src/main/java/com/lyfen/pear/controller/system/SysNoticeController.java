@@ -1,12 +1,10 @@
 package com.lyfen.pear.controller.system;
 
 import com.lyfen.pear.common.utils.SecurityUtils;
-import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
-import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
+import com.lyfen.pear.domain.system.SysNotice;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
-import com.lyfen.pear.domain.system.SysNotice;
 import com.lyfen.pear.service.system.SysNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -50,7 +48,6 @@ public class SysNoticeController extends BaseController {
      * 新增通知公告
      */
     @PreAuthorize("@ss.hasPermi('system:notice:add')")
-    @Log(title = "通知公告", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysNotice notice) {
         notice.setCreatedBy(SecurityUtils.getUsername());
@@ -61,7 +58,6 @@ public class SysNoticeController extends BaseController {
      * 修改通知公告
      */
     @PreAuthorize("@ss.hasPermi('system:notice:edit')")
-    @Log(title = "通知公告", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysNotice notice) {
         notice.setUpdatedBy(SecurityUtils.getUsername());
@@ -72,7 +68,6 @@ public class SysNoticeController extends BaseController {
      * 删除通知公告
      */
     @PreAuthorize("@ss.hasPermi('system:notice:remove')")
-    @Log(title = "通知公告", businessType = BusinessType.DELETE)
     @DeleteMapping("/{noticeId}")
     public AjaxResult remove(@PathVariable Long noticeId) {
         return toAjax(noticeService.deleteNoticeById(noticeId));

@@ -2,12 +2,10 @@ package com.lyfen.pear.controller.system;
 
 import com.lyfen.pear.common.utils.SecurityUtils;
 import com.lyfen.pear.common.utils.poi.ExcelUtil;
-import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
-import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
+import com.lyfen.pear.domain.system.SysDictData;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
-import com.lyfen.pear.domain.system.SysDictData;
 import com.lyfen.pear.service.system.SysDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,7 +33,6 @@ public class SysDictDataController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "字典数据", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:dict:export')")
     @GetMapping("/export")
     public AjaxResult export(SysDictData dictData) {
@@ -65,7 +62,6 @@ public class SysDictDataController extends BaseController {
      * 新增字典类型
      */
     @PreAuthorize("@ss.hasPermi('system:dict:add')")
-    @Log(title = "字典数据", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysDictData dict) {
         dict.setCreatedBy(SecurityUtils.getUsername());
@@ -76,7 +72,6 @@ public class SysDictDataController extends BaseController {
      * 修改保存字典类型
      */
     @PreAuthorize("@ss.hasPermi('system:dict:edit')")
-    @Log(title = "字典数据", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysDictData dict) {
         dict.setUpdatedBy(SecurityUtils.getUsername());
@@ -87,7 +82,6 @@ public class SysDictDataController extends BaseController {
      * 删除字典类型
      */
     @PreAuthorize("@ss.hasPermi('system:dict:remove')")
-    @Log(title = "字典类型", businessType = BusinessType.DELETE)
     @DeleteMapping("/{dictCodes}")
     public AjaxResult remove(@PathVariable Long[] dictCodes) {
         return toAjax(dictDataService.deleteDictDataByIds(dictCodes));

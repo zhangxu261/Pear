@@ -3,12 +3,10 @@ package com.lyfen.pear.controller.system;
 import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.utils.SecurityUtils;
 import com.lyfen.pear.common.utils.poi.ExcelUtil;
-import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
-import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
+import com.lyfen.pear.domain.system.SysDictType;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
-import com.lyfen.pear.domain.system.SysDictType;
 import com.lyfen.pear.service.system.SysDictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,7 +34,6 @@ public class SysDictTypeController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "字典类型", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:dict:export')")
     @GetMapping("/export")
     public AjaxResult export(SysDictType dictType) {
@@ -58,7 +55,6 @@ public class SysDictTypeController extends BaseController {
      * 新增字典类型
      */
     @PreAuthorize("@ss.hasPermi('system:dict:add')")
-    @Log(title = "字典类型", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysDictType dict) {
         if (UserConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict))) {
@@ -72,7 +68,6 @@ public class SysDictTypeController extends BaseController {
      * 修改字典类型
      */
     @PreAuthorize("@ss.hasPermi('system:dict:edit')")
-    @Log(title = "字典类型", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysDictType dict) {
         if (UserConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict))) {
@@ -86,7 +81,6 @@ public class SysDictTypeController extends BaseController {
      * 删除字典类型
      */
     @PreAuthorize("@ss.hasPermi('system:dict:remove')")
-    @Log(title = "字典类型", businessType = BusinessType.DELETE)
     @DeleteMapping("/{dictIds}")
     public AjaxResult remove(@PathVariable Long[] dictIds) {
         return toAjax(dictTypeService.deleteDictTypeByIds(dictIds));

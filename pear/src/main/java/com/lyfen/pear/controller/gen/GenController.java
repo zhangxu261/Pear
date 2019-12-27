@@ -1,13 +1,11 @@
 package com.lyfen.pear.controller.gen;
 
 import cn.hutool.core.convert.Convert;
-import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
-import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
+import com.lyfen.pear.domain.gen.GenTable;
+import com.lyfen.pear.domain.gen.GenTableColumn;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
-import com.lyfen.pear.domain.gen.GenTable;
-import com.lyfen.pear.domain.gen.GenTableColumn;
 import com.lyfen.pear.service.gen.GenTableColumnService;
 import com.lyfen.pear.service.gen.GenTableService;
 import org.apache.commons.io.IOUtils;
@@ -90,7 +88,6 @@ public class GenController extends BaseController {
      * 导入表结构（保存）
      */
     @PreAuthorize("@ss.hasPermi('tool:gen:list')")
-    @Log(title = "代码生成", businessType = BusinessType.IMPORT)
     @PostMapping("/importTable")
     public AjaxResult importTableSave(String tables) {
         String[] tableNames = Convert.toStrArray(tables);
@@ -104,7 +101,6 @@ public class GenController extends BaseController {
      * 修改保存代码生成业务
      */
     @PreAuthorize("@ss.hasPermi('tool:gen:edit')")
-    @Log(title = "代码生成", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult editSave(@Validated @RequestBody GenTable genTable) {
         System.out.println(genTable.getParams().size());
@@ -114,7 +110,6 @@ public class GenController extends BaseController {
     }
 
     @PreAuthorize("@ss.hasPermi('tool:gen:remove')")
-    @Log(title = "代码生成", businessType = BusinessType.DELETE)
     @DeleteMapping("/{tableIds}")
     public AjaxResult remove(@PathVariable Long[] tableIds) {
         genTableService.deleteGenTableByIds(tableIds);
@@ -135,7 +130,6 @@ public class GenController extends BaseController {
      * 生成代码
      */
     @PreAuthorize("@ss.hasPermi('tool:gen:code')")
-    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/genCode/{tableName}")
     public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException {
         byte[] data = genTableService.generatorCode(tableName);
@@ -146,7 +140,6 @@ public class GenController extends BaseController {
      * 批量生成代码
      */
     @PreAuthorize("@ss.hasPermi('tool:gen:code')")
-    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/batchGenCode")
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException {
         String[] tableNames = Convert.toStrArray(tables);

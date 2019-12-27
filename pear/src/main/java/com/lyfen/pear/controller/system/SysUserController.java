@@ -5,14 +5,12 @@ import com.lyfen.pear.common.utils.SecurityUtils;
 import com.lyfen.pear.common.utils.ServletUtils;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.common.utils.poi.ExcelUtil;
-import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
-import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
+import com.lyfen.pear.domain.system.SysUser;
 import com.lyfen.pear.framework.security.LoginUser;
 import com.lyfen.pear.framework.security.service.TokenService;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
-import com.lyfen.pear.domain.system.SysUser;
 import com.lyfen.pear.service.system.SysRoleService;
 import com.lyfen.pear.service.system.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +49,6 @@ public class SysUserController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:user:export')")
     @GetMapping("/export")
     public AjaxResult export(SysUser user) {
@@ -60,7 +57,6 @@ public class SysUserController extends BaseController {
         return util.exportExcel(list, "用户数据");
     }
 
-    @Log(title = "用户管理", businessType = BusinessType.IMPORT)
     @PreAuthorize("@ss.hasPermi('system:user:import')")
     @PostMapping("/importData")
     public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception {
@@ -97,7 +93,6 @@ public class SysUserController extends BaseController {
      * 新增用户
      */
     @PreAuthorize("@ss.hasPermi('system:user:add')")
-    @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysUser user) {
         if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user.getUserName()))) {
@@ -116,7 +111,6 @@ public class SysUserController extends BaseController {
      * 修改用户
      */
     @PreAuthorize("@ss.hasPermi('system:user:edit')")
-    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysUser user) {
         userService.checkUserAllowed(user);
@@ -133,7 +127,6 @@ public class SysUserController extends BaseController {
      * 删除用户
      */
     @PreAuthorize("@ss.hasPermi('system:user:remove')")
-    @Log(title = "用户管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{userIds}")
     public AjaxResult remove(@PathVariable Long[] userIds) {
         return toAjax(userService.deleteUserByIds(userIds));
@@ -143,7 +136,6 @@ public class SysUserController extends BaseController {
      * 重置密码
      */
     @PreAuthorize("@ss.hasPermi('system:user:edit')")
-    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/resetPwd")
     public AjaxResult resetPwd(@RequestBody SysUser user) {
         userService.checkUserAllowed(user);
@@ -156,7 +148,6 @@ public class SysUserController extends BaseController {
      * 状态修改
      */
     @PreAuthorize("@ss.hasPermi('system:user:edit')")
-    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/changeStatus")
     public AjaxResult changeStatus(@RequestBody SysUser user) {
         userService.checkUserAllowed(user);

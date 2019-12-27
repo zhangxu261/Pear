@@ -1,10 +1,7 @@
 package com.lyfen.pear.framework.security.service;
 
-import com.lyfen.pear.common.constant.Constants;
 import com.lyfen.pear.common.exception.CustomException;
 import com.lyfen.pear.common.exception.user.UserPasswordNotMatchException;
-import com.lyfen.pear.framework.manager.AsyncManager;
-import com.lyfen.pear.framework.manager.factory.AsyncFactory;
 import com.lyfen.pear.framework.security.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,14 +41,11 @@ public class SysLoginService {
                     .authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (Exception e) {
             if (e instanceof BadCredentialsException) {
-                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, "用户不存在/密码错误"));
                 throw new UserPasswordNotMatchException();
             } else {
-                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, e.getMessage()));
                 throw new CustomException(e.getMessage());
             }
         }
-        AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, "登录成功"));
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         // 生成token
         return tokenService.createToken(loginUser);

@@ -1,11 +1,9 @@
 package com.lyfen.pear.controller;
 
-import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
-import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
+import com.lyfen.pear.domain.Project;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
-import com.lyfen.pear.domain.Project;
 import com.lyfen.pear.service.ProjectService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +32,6 @@ public class  ProjectController extends BaseController {
     }
 
     @PreAuthorize("@ss.hasPermi('pear:project:add')")
-    @Log(title = "项目", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Project project) {
         return toAjax(projectService.insert(project));
@@ -53,7 +50,6 @@ public class  ProjectController extends BaseController {
      * 修改项目
      */
     @PreAuthorize("@ss.hasPermi('pear:project:edit')")
-    @Log(title = "项目", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Project project) {
         return toAjax(projectService.update(project));
