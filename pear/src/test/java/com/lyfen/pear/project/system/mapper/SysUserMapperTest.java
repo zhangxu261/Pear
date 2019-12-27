@@ -1,5 +1,6 @@
 package com.lyfen.pear.project.system.mapper;
 
+import com.lyfen.pear.mapper.system.SysUserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

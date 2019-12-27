@@ -5,7 +5,7 @@ import java.util.Set;
 import com.lyfen.pear.common.utils.ServletUtils;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.framework.security.LoginUser;
-import com.lyfen.pear.project.system.domain.SysRole;
+import com.lyfen.pear.domain.system.SysRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;

@@ -35,7 +35,7 @@ spring:
   # redis 配置
   redis:
     # 地址
-    host: 106.54.131.59
+    host: localhost
     # 端口，默认为6379
     port: 6379
     # 连接超时时间
@@ -54,7 +54,7 @@ spring:
     name: pear
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://106.54.131.59:63306/pear?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/pear?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
     password: 1qaz@WSX
 
@@ -71,7 +71,7 @@ token:
 mybatis-plus:
   mapper-locations: classpath*:mybatis/**/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  type-aliases-package: com.lyfen.pear
+  type-aliases-package: com.lyfen.pear.domain
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
