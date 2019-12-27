@@ -18,7 +18,7 @@ public class TeamMember implements Serializable {
     private Long id;
 
     @ApiModelProperty("部门编号")
-    private String teamId;
+    private Long teamId;
 
     @ApiModelProperty("成员编号")
     private String memberCode;
