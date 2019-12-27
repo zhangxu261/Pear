@@ -1,12 +1,12 @@
-package com.lyfen.pear.workbench.controller;
+package com.lyfen.pear.controller;
 
 import com.lyfen.pear.framework.aspectj.lang.annotation.Log;
 import com.lyfen.pear.framework.aspectj.lang.enums.BusinessType;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
-import com.lyfen.pear.workbench.domain.Project;
-import com.lyfen.pear.workbench.service.ProjectService;
+import com.lyfen.pear.domain.Project;
+import com.lyfen.pear.service.ProjectService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

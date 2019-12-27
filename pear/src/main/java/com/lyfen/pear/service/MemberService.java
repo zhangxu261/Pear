@@ -1,4 +1,4 @@
-package com.lyfen.pear.workbench.service;
+package com.lyfen.pear.service;
 
 import org.springframework.stereotype.Service;
 

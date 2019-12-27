@@ -1,4 +1,4 @@
-package com.lyfen.pear.workbench.domain;
+package com.lyfen.pear.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
@@ -8,23 +8,30 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@ApiModel("项目成员")
+@ApiModel("项目")
 @Data
-@TableName("pear_project_member")
-public class ProjectMember implements Serializable {
+@TableName("pear_project")
+public class Project implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键ID")
     @TableId(type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty("项目编号")
-    private String projectCode;
+    private String code;
 
-    @ApiModelProperty("成员编号")
-    private String memberCode;
+    @ApiModelProperty("项目名称")
+    private String name;
 
-    @ApiModelProperty("是否负责人")
-    private Boolean master;
+    @ApiModelProperty("项目描述")
+    private String description;
+
+    @ApiModelProperty("项目进度")
+    private Float schedule;
+
+    @ApiModelProperty("预估工时")
+    private Integer estimateTime;
 
     @ApiModelProperty("创建人")
     @TableField(fill = FieldFill.INSERT)

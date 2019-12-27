@@ -1,4 +1,4 @@
-package com.lyfen.pear.workbench.domain;
+package com.lyfen.pear.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
@@ -8,48 +8,36 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@ApiModel("任务")
+@ApiModel("成员")
 @Data
-@TableName("pear_task")
-public class Task implements Serializable {
+@TableName("pear_member")
+public class Member implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键ID")
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty("任务编号")
+    @ApiModelProperty("成员编号")
     private String code;
 
-    @ApiModelProperty("项目编号")
-    private String projectCode;
+    @ApiModelProperty("登录账号")
+    private String loginName;
 
-    @ApiModelProperty("父级任务")
-    private Long parentCode;
+    @ApiModelProperty("密码")
+    private String password;
 
-    @ApiModelProperty("任务主题")
-    private String subject;
+    @ApiModelProperty("姓名")
+    private String name;
 
-    @ApiModelProperty("任务描述")
-    private String description;
+    @ApiModelProperty("邮箱地址")
+    private String email;
 
-    @ApiModelProperty("任务进度")
-    private Float schedule;
+    @ApiModelProperty("头像")
+    private String avatar;
 
-    @ApiModelProperty("任务类型")
-    private Integer type;
-
-    @ApiModelProperty("任务状态")
+    @ApiModelProperty("状态")
     private Integer status;
-
-    @ApiModelProperty("预估工时")
-    private Integer estimateTime;
-
-    @ApiModelProperty("实际工时")
-    private Integer actualTime;
-
-    @ApiModelProperty("指派人")
-    private String assignee;
 
     @ApiModelProperty("创建人")
     @TableField(fill = FieldFill.INSERT)

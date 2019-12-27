@@ -1,8 +1,8 @@
-package com.lyfen.pear.workbench.service;
+package com.lyfen.pear.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.lyfen.pear.workbench.domain.Project;
-import com.lyfen.pear.workbench.mapper.ProjectMapper;
+import com.lyfen.pear.domain.Project;
+import com.lyfen.pear.mapper.ProjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
