@@ -1,9 +1,7 @@
 {
   "name": "pear",
   "version": "2.0.0",
-  "description": "若依管理系统",
-  "author": "若依",
-  "license": "MIT",
+  "description": "项目管理系统",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",
