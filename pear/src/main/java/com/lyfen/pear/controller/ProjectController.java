@@ -17,7 +17,7 @@ import java.util.List;
 @Api("项目管理")
 @RestController
 @RequestMapping("/pear/project")
-public class ProjectController extends BaseController {
+public class  ProjectController extends BaseController {
 
     @Autowired
     private ProjectService projectService;
