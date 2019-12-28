@@ -35,23 +35,19 @@
         </el-row>
 
         <el-table v-loading="loading" :data="memberList" stripe>
-          <el-table-column label="工号 " align="left" prop="code" />
+          <el-table-column label="用户名 " align="left" prop="userName" />
           <el-table-column label="姓名" align="left">
             <template slot-scope="scope">
-              <span>{{scope.row.name}}</span>
+              <span>{{scope.row.realName}}</span>
               <span v-if="scope.row.isLeader">(组长)</span>
             </template>
           </el-table-column>
+          <el-table-column label="手机" align="left" prop="mobile" />
           <el-table-column label="邮箱" align="left" prop="email" />
           <el-table-column label="状态" align="left" prop="status" />
-          <el-table-column label="创建日期" align="left" prop="createdTime" width="160">
-            <template slot-scope="scope">
-              <span>{{ parseTime(scope.row.createdTime, '{y}-{m}-{d}') }}</span>
-            </template>
-          </el-table-column>
           <el-table-column
             label="操作"
-            align="center"
+            align="left"
             width="180"
             class-name="small-padding fixed-width"
           >

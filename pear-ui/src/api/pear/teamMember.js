@@ -11,7 +11,7 @@ export function listTeam(query) {
 
 export function listMember(query) {
     return request({
-        url: '/pear/member/list',
+        url: '/pear/team/listMember',
         method: 'get',
         params: query
     })

@@ -1,6 +1,7 @@
 package com.lyfen.pear.controller;
 
 import com.lyfen.pear.domain.Team;
+import com.lyfen.pear.domain.dto.MemberDTO;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
@@ -25,6 +26,14 @@ public class TeamController extends BaseController {
     public TableDataInfo list() {
         startPage();
         List<Team> list = teamService.selectList();
+        return getDataTable(list);
+    }
+
+    @ApiOperation("查询成员列表")
+    @GetMapping("/listMember")
+    public TableDataInfo list(Long teamId) {
+        startPage();
+        List<MemberDTO> list = teamService.selectMemberList(teamId);
         return getDataTable(list);
     }
 

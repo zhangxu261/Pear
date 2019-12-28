@@ -21,7 +21,7 @@ public class TeamMember implements Serializable {
     private Long teamId;
 
     @ApiModelProperty("成员编号")
-    private Long memberId;
+    private Long userId;
 
     @ApiModelProperty("是否领导")
     private Integer isLeader;
