@@ -4,7 +4,6 @@ import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.exception.CustomException;
 import com.lyfen.pear.common.utils.SecurityUtils;
 import com.lyfen.pear.common.utils.StringUtils;
-import com.lyfen.pear.framework.aspectj.lang.annotation.DataScope;
 import com.lyfen.pear.domain.system.SysRole;
 import com.lyfen.pear.domain.system.SysUser;
 import com.lyfen.pear.domain.system.SysUserRole;
@@ -46,7 +45,6 @@ public class SysUserService {
      * @param user 用户信息
      * @return 用户信息集合信息
      */
-    @DataScope(deptAlias = "d", userAlias = "u")
     public List<SysUser> selectUserList(SysUser user) {
         return userMapper.selectUserList(user);
     }

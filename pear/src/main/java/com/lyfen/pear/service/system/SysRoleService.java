@@ -3,7 +3,6 @@ package com.lyfen.pear.service.system;
 import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.exception.CustomException;
 import com.lyfen.pear.common.utils.StringUtils;
-import com.lyfen.pear.framework.aspectj.lang.annotation.DataScope;
 import com.lyfen.pear.domain.system.SysRole;
 import com.lyfen.pear.domain.system.SysRoleDept;
 import com.lyfen.pear.domain.system.SysRoleMenu;
@@ -42,7 +41,6 @@ public class SysRoleService {
      * @param role 角色信息
      * @return 角色数据集合信息
      */
-    @DataScope(deptAlias = "d")
     public List<SysRole> selectRoleList(SysRole role) {
         return roleMapper.selectRoleList(role);
     }
@@ -180,22 +178,6 @@ public class SysRoleService {
      */
     public int updateRoleStatus(SysRole role) {
         return roleMapper.updateRole(role);
-    }
-
-    /**
-     * 修改数据权限信息
-     *
-     * @param role 角色信息
-     * @return 结果
-     */
-    @Transactional
-    public int authDataScope(SysRole role) {
-        // 修改角色信息
-        roleMapper.updateRole(role);
-        // 删除角色与部门关联
-        roleDeptMapper.deleteRoleDeptByRoleId(role.getRoleId());
-        // 新增角色和部门信息（数据权限）
-        return insertRoleDept(role);
     }
 
     /**

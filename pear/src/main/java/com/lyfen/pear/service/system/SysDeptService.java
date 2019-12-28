@@ -3,9 +3,8 @@ package com.lyfen.pear.service.system;
 import com.lyfen.pear.common.constant.UserConstants;
 import com.lyfen.pear.common.exception.CustomException;
 import com.lyfen.pear.common.utils.StringUtils;
-import com.lyfen.pear.framework.aspectj.lang.annotation.DataScope;
-import com.lyfen.pear.framework.web.domain.TreeSelect;
 import com.lyfen.pear.domain.system.SysDept;
+import com.lyfen.pear.framework.web.domain.TreeSelect;
 import com.lyfen.pear.mapper.system.SysDeptMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,6 @@ public class SysDeptService {
      * @param dept 部门信息
      * @return 部门信息集合
      */
-    @DataScope(deptAlias = "d")
     public List<SysDept> selectDeptList(SysDept dept) {
         return deptMapper.selectDeptList(dept);
     }

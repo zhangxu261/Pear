@@ -1,4 +1,4 @@
-package com.lyfen.pear.service.dto;
+package com.lyfen.pear.domain.dto;
 
 import com.lyfen.pear.domain.Member;
 import lombok.Data;

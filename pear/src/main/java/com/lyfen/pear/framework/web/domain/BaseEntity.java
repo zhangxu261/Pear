@@ -49,11 +49,6 @@ public class BaseEntity implements Serializable {
     private String remark;
 
     /**
-     * 数据权限
-     */
-    private String dataScope;
-
-    /**
      * 开始时间
      */
     @JsonIgnore
@@ -116,14 +111,6 @@ public class BaseEntity implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public String getDataScope() {
-        return dataScope;
-    }
-
-    public void setDataScope(String dataScope) {
-        this.dataScope = dataScope;
     }
 
     public String getBeginTime() {

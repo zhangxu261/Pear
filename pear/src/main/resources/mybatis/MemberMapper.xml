@@ -6,7 +6,7 @@
         member.id
     </sql>
 
-    <select id="selectListByTeamId" resultType="com.lyfen.pear.service.dto.MemberDTO">
+    <select id="selectListByTeamId" resultType="com.lyfen.pear.domain.dto.MemberDTO">
         select m.id,m.code,m.login_name,m.name,m.email,m.avatar,m.status,m.created_by,m.created_time,tm.team_id,tm.is_leader
         from pear_member m left join pear_team_member tm on m.id = tm.member_id
         <where>

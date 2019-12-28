@@ -1,7 +1,7 @@
 package com.lyfen.pear.service;
 
 import com.lyfen.pear.mapper.MemberMapper;
-import com.lyfen.pear.service.dto.MemberDTO;
+import com.lyfen.pear.domain.dto.MemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

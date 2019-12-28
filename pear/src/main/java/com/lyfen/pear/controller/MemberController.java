@@ -1,10 +1,9 @@
 package com.lyfen.pear.controller;
 
-import com.lyfen.pear.domain.Member;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
 import com.lyfen.pear.service.MemberService;
-import com.lyfen.pear.service.dto.MemberDTO;
+import com.lyfen.pear.domain.dto.MemberDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.lyfen.pear.framework.config;
+package com.lyfen.pear.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.lyfen.pear.common.exception.CustomException;

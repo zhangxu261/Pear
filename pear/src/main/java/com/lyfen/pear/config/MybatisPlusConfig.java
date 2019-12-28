@@ -1,4 +1,4 @@
-package com.lyfen.pear.framework.config;
+package com.lyfen.pear.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;

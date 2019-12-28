@@ -42,12 +42,6 @@ public class SysRole extends BaseEntity {
     private String roleSort;
 
     /**
-     * 数据范围（1：所有数据权限；2：自定义数据权限；3：本部门数据权限；4：本部门及以下数据权限）
-     */
-    @Excel(name = "数据范围", readConverterExp = "1=所有数据权限,2=自定义数据权限,3=本部门数据权限,4=本部门及以下数据权限")
-    private String dataScope;
-
-    /**
      * 角色状态（0正常 1停用）
      */
     @Excel(name = "角色状态", readConverterExp = "0=正常,1=停用")
@@ -126,14 +120,6 @@ public class SysRole extends BaseEntity {
         this.roleSort = roleSort;
     }
 
-    public String getDataScope() {
-        return dataScope;
-    }
-
-    public void setDataScope(String dataScope) {
-        this.dataScope = dataScope;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -174,20 +160,4 @@ public class SysRole extends BaseEntity {
         this.deptIds = deptIds;
     }
 
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("roleId", getRoleId())
-                .append("roleName", getRoleName())
-                .append("roleKey", getRoleKey())
-                .append("roleSort", getRoleSort())
-                .append("dataScope", getDataScope())
-                .append("status", getStatus())
-                .append("delFlag", getDelFlag())
-                .append("createdBy", getCreatedBy())
-                .append("createdTime", getCreatedTime())
-                .append("updatedBy", getUpdatedBy())
-                .append("updatedTime", getUpdatedTime())
-                .append("remark", getRemark())
-                .toString();
-    }
 }

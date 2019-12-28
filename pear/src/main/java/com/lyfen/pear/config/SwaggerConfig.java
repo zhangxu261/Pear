@@ -1,4 +1,4 @@
-package com.lyfen.pear.framework.config;
+package com.lyfen.pear.config;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
