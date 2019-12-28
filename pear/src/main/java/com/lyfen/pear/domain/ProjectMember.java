@@ -21,7 +21,7 @@ public class ProjectMember implements Serializable {
     private String projectCode;
 
     @ApiModelProperty("成员编号")
-    private String memberCode;
+    private Long memberId;
 
     @ApiModelProperty("是否负责人")
     private Boolean master;

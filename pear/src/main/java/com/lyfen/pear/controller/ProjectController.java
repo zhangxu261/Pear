@@ -6,6 +6,7 @@ import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
 import com.lyfen.pear.service.ProjectService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -20,36 +21,27 @@ public class  ProjectController extends BaseController {
     @Autowired
     private ProjectService projectService;
 
-    /**
-     * 查询项目列表
-     */
-    @PreAuthorize("@ss.hasPermi('pear:project:list')")
+    @ApiOperation("项目列表")
     @GetMapping("/list")
-    public TableDataInfo list(Project project) {
+    public TableDataInfo list() {
         startPage();
-        List<Project> list = projectService.selectList(project);
+        List<Project> list = projectService.selectList();
         return getDataTable(list);
     }
 
-    @PreAuthorize("@ss.hasPermi('pear:project:add')")
+    @ApiOperation("新增项目")
     @PostMapping
     public AjaxResult add(@RequestBody Project project) {
         return toAjax(projectService.insert(project));
     }
 
-    /**
-     * 获取项目详细信息
-     */
-    @PreAuthorize("@ss.hasPermi('pear:project:query')")
+    @ApiOperation("跟ID获取项目信息")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return AjaxResult.success(projectService.selectById(id));
     }
 
-    /**
-     * 修改项目
-     */
-    @PreAuthorize("@ss.hasPermi('pear:project:edit')")
+    @ApiOperation("修改项目信息")
     @PutMapping
     public AjaxResult edit(@RequestBody Project project) {
         return toAjax(projectService.update(project));

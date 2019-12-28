@@ -18,7 +18,7 @@ public class Member implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty("成员编号")
+    @ApiModelProperty("工号")
     private String code;
 
     @ApiModelProperty("登录账号")

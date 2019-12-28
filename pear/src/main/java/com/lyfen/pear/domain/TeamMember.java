@@ -21,10 +21,10 @@ public class TeamMember implements Serializable {
     private Long teamId;
 
     @ApiModelProperty("成员编号")
-    private String memberCode;
+    private Long memberId;
 
     @ApiModelProperty("是否领导")
-    private Boolean leader;
+    private Integer isLeader;
 
     @ApiModelProperty("创建人")
     @TableField(fill = FieldFill.INSERT)
