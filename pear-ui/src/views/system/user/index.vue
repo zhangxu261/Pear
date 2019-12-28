@@ -28,19 +28,19 @@
       <!--用户数据-->
       <el-col :span="20" :xs="24">
         <el-form :model="queryParams" ref="queryForm" :inline="true" label-width="68px">
-          <el-form-item label="用户名称" prop="userName">
+          <el-form-item label="用户名" prop="userName">
             <el-input
               v-model="queryParams.userName"
-              placeholder="请输入用户名称"
+              placeholder="请输入用户名"
               clearable
               size="small"
               style="width: 240px"
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
-          <el-form-item label="手机号码" prop="phonenumber">
+          <el-form-item label="手机号码" prop="mobile">
             <el-input
-              v-model="queryParams.phonenumber"
+              v-model="queryParams.mobile"
               placeholder="请输入手机号码"
               clearable
               size="small"
@@ -135,10 +135,10 @@
         <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="40" align="center" />
           <el-table-column label="用户编号" align="center" prop="userId" />
-          <el-table-column label="用户名称" align="center" prop="userName" />
-          <el-table-column label="用户昵称" align="center" prop="nickName" />
+          <el-table-column label="用户名" align="center" prop="userName" />
+          <el-table-column label="姓名" align="center" prop="realName" />
           <el-table-column label="部门" align="center" prop="dept.deptName" />
-          <el-table-column label="手机号码" align="center" prop="phonenumber" width="120" />
+          <el-table-column label="手机号码" align="center" prop="mobile" width="120" />
           <el-table-column label="状态" align="center">
             <template slot-scope="scope">
               <el-switch
@@ -202,8 +202,8 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="用户昵称" prop="nickName">
-              <el-input v-model="form.nickName" placeholder="请输入用户昵称" />
+            <el-form-item label="姓名" prop="realName">
+              <el-input v-model="form.realName" placeholder="请输入姓名" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -212,8 +212,8 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="手机号码" prop="phonenumber">
-              <el-input v-model="form.phonenumber" placeholder="请输入手机号码" maxlength="11" />
+            <el-form-item label="手机号码" prop="mobile">
+              <el-input v-model="form.mobile" placeholder="请输入手机号码" maxlength="11" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -222,25 +222,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="用户名称" prop="userName">
-              <el-input v-model="form.userName" placeholder="请输入用户名称" />
+            <el-form-item label="用户名" prop="userName">
+              <el-input v-model="form.userName" placeholder="请输入用户名" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item v-if="form.userId == undefined" label="用户密码" prop="password">
-              <el-input v-model="form.password" placeholder="请输入用户密码" type="password" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="用户性别">
-              <el-select v-model="form.sex" placeholder="请选择">
-                <el-option
-                  v-for="dict in sexOptions"
-                  :key="dict.dictValue"
-                  :label="dict.dictLabel"
-                  :value="dict.dictValue"
-                ></el-option>
-              </el-select>
+            <el-form-item v-if="form.userId == undefined" label="密码" prop="password">
+              <el-input v-model="form.password" placeholder="请输入密码" type="password" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -352,8 +340,6 @@ export default {
       dateRange: [],
       // 状态数据字典
       statusOptions: [],
-      // 性别状态字典
-      sexOptions: [],
       // 角色选项
       roleOptions: [],
       // 表单参数
@@ -382,23 +368,23 @@ export default {
         pageNum: 1,
         pageSize: 10,
         userName: undefined,
-        phonenumber: undefined,
+        mobile: undefined,
         status: undefined,
         deptId: undefined
       },
       // 表单校验
       rules: {
         userName: [
-          { required: true, message: "用户名称不能为空", trigger: "blur" }
+          { required: true, message: "用户名不能为空", trigger: "blur" }
         ],
-        nickName: [
-          { required: true, message: "用户昵称不能为空", trigger: "blur" }
+        realName: [
+          { required: true, message: "姓名不能为空", trigger: "blur" }
         ],
         deptId: [
           { required: true, message: "归属部门不能为空", trigger: "blur" }
         ],
         password: [
-          { required: true, message: "用户密码不能为空", trigger: "blur" }
+          { required: true, message: "密码不能为空", trigger: "blur" }
         ],
         email: [
           {
@@ -407,7 +393,7 @@ export default {
             trigger: ["blur", "change"]
           }
         ],
-        phonenumber: [
+        mobile: [
           {
             pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
             message: "请输入正确的手机号码",
@@ -428,9 +414,6 @@ export default {
     this.getTreeselect();
     this.getDicts("sys_normal_disable").then(response => {
       this.statusOptions = response.data;
-    });
-    this.getDicts("sys_user_sex").then(response => {
-      this.sexOptions = response.data;
     });
     this.getConfigKey("sys.user.initPassword").then(response => {
       this.initPassword = response.data;
@@ -489,11 +472,10 @@ export default {
         userId: undefined,
         deptId: 100,
         userName: undefined,
-        nickName: undefined,
+        realName: undefined,
         password: undefined,
-        phonenumber: undefined,
+        mobile: undefined,
         email: undefined,
-        sex: undefined,
         status: "0",
         remark: undefined,
         roleIds: []

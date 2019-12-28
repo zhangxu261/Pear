@@ -40,8 +40,8 @@ public class SysUser extends BaseEntity {
     /**
      * 用户昵称
      */
-    @Excel(name = "用户名称")
-    private String nickName;
+    @Excel(name = "姓名")
+    private String realName;
 
     /**
      * 用户邮箱
@@ -53,7 +53,7 @@ public class SysUser extends BaseEntity {
      * 手机号码
      */
     @Excel(name = "手机号码")
-    private String phonenumber;
+    private String mobile;
 
     /**
      * 用户头像
@@ -133,12 +133,12 @@ public class SysUser extends BaseEntity {
     }
 
     @Size(min = 0, max = 30, message = "用户昵称长度不能超过30个字符")
-    public String getNickName() {
-        return nickName;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     @NotBlank(message = "用户账号不能为空")
@@ -162,12 +162,12 @@ public class SysUser extends BaseEntity {
     }
 
     @Size(min = 0, max = 11, message = "手机号码长度不能超过11个字符")
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getAvatar() {
