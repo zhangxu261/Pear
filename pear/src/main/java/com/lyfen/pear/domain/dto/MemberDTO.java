@@ -9,4 +9,6 @@ public class MemberDTO extends SysUser {
     private Long teamId;
 
     private Integer isLeader;
+
+
 }

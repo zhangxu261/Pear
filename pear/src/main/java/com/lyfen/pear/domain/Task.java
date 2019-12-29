@@ -49,7 +49,7 @@ public class Task implements Serializable {
     private Integer actualTime;
 
     @ApiModelProperty("指派人")
-    private String assignee;
+    private String userId;
 
     @ApiModelProperty("创建人")
     @TableField(fill = FieldFill.INSERT)

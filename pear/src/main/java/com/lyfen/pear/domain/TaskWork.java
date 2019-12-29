@@ -18,10 +18,10 @@ public class TaskWork implements Serializable {
     private Long id;
 
     @ApiModelProperty("任务编号")
-    private String taskCode;
+    private Long taskId;
 
-    @ApiModelProperty("成员编号")
-    private String memberCode;
+    @ApiModelProperty("成员id")
+    private Long userId;
 
     @ApiModelProperty("工作日志")
     private String workLog;

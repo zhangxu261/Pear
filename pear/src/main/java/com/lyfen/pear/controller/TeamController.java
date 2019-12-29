@@ -1,6 +1,7 @@
 package com.lyfen.pear.controller;
 
 import com.lyfen.pear.domain.Team;
+import com.lyfen.pear.domain.TeamMember;
 import com.lyfen.pear.domain.dto.MemberDTO;
 import com.lyfen.pear.framework.web.controller.BaseController;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
@@ -31,10 +32,29 @@ public class TeamController extends BaseController {
 
     @ApiOperation("查询成员列表")
     @GetMapping("/listMember")
-    public TableDataInfo list(Long teamId) {
+    public TableDataInfo listMember(Long teamId) {
         startPage();
         List<MemberDTO> list = teamService.selectMemberList(teamId);
         return getDataTable(list);
+    }
+
+    @ApiOperation("搜索成员列表")
+    @GetMapping("/searchMember")
+    public AjaxResult searchMember(String search) {
+        List<MemberDTO> list = teamService.searchMemberList(search);
+        return AjaxResult.success(list);
+    }
+
+    @ApiOperation("添加团队成员")
+    @PostMapping("/addMember")
+    public AjaxResult addMember(Long teamId, Long userId) {
+        return toAjax(teamService.addMember(teamId, userId));
+    }
+
+    @ApiOperation("移除团队成员")
+    @PostMapping("/removeMember")
+    public AjaxResult removeMember(Long teamId, Long userId) {
+        return toAjax(teamService.removeMember(teamId, userId));
     }
 
     @ApiOperation("新增团队")

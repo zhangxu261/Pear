@@ -11,4 +11,14 @@
             </if>
         </where>
     </select>
+
+    <select id="searchList" resultType="com.lyfen.pear.domain.dto.MemberDTO">
+        select u.user_id,u.user_name,u.real_name,u.email,u.mobile,u.avatar,u.status from sys_user u
+        <where>
+            <if test="search != null and search != ''">
+                u.user_name like concat('%', #{search}, '%') or
+                u.real_name like concat('%', #{search}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>

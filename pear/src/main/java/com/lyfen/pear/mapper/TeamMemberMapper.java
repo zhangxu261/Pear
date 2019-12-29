@@ -9,4 +9,6 @@ import java.util.List;
 public interface TeamMemberMapper extends BaseMapper<TeamMember> {
 
     List<MemberDTO> selectListByTeamId(Long teamId);
+
+    List<MemberDTO> searchList(String search);
 }

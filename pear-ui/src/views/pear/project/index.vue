@@ -12,7 +12,7 @@
       </el-col>
     </el-row>
 
-    <el-table v-loading="loading" :data="projectList" stripe :show-header="false">
+    <el-table v-loading="loading" :data="projectList" :show-header="false">
       <el-table-column align="left" width="520">
         <template slot-scope="scope">
           <div><b>{{ scope.row.code }} - {{ scope.row.name }}</b></div>
@@ -39,12 +39,6 @@
       </el-table-column>
       <el-table-column align="right" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-user"
-            @click="handleUpdate(scope.row)"
-          >添加成员</el-button>
           <el-button
             size="mini"
             type="text"
