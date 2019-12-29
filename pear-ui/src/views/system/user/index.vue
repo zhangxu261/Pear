@@ -256,11 +256,6 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="24">
-            <el-form-item label="备注">
-              <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
-            </el-form-item>
-          </el-col>
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -477,7 +472,6 @@ export default {
         mobile: undefined,
         email: undefined,
         status: "0",
-        remark: undefined,
         roleIds: []
       };
       this.resetForm("form");

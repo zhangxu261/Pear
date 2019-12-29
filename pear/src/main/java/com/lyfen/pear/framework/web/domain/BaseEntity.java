@@ -44,11 +44,6 @@ public class BaseEntity implements Serializable {
     private Date updatedTime;
 
     /**
-     * 备注
-     */
-    private String remark;
-
-    /**
      * 开始时间
      */
     @JsonIgnore
@@ -103,14 +98,6 @@ public class BaseEntity implements Serializable {
 
     public void setUpdatedTime(Date updatedTime) {
         this.updatedTime = updatedTime;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
     }
 
     public String getBeginTime() {

@@ -153,23 +153,4 @@ public class SysDictData extends BaseEntity {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("dictCode", getDictCode())
-                .append("dictSort", getDictSort())
-                .append("dictLabel", getDictLabel())
-                .append("dictValue", getDictValue())
-                .append("dictType", getDictType())
-                .append("cssClass", getCssClass())
-                .append("listClass", getListClass())
-                .append("isDefault", getIsDefault())
-                .append("status", getStatus())
-                .append("createdBy", getCreatedBy())
-                .append("createdTime", getCreatedTime())
-                .append("updatedBy", getUpdatedBy())
-                .append("updatedTime", getUpdatedTime())
-                .append("remark", getRemark())
-                .toString();
-    }
 }

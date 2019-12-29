@@ -15,12 +15,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="createdTime"   column="created_time"    />
 		<result property="updatedBy"     column="updated_by"      />
 		<result property="updatedTime"   column="updated_time"    />
-		<result property="remark"       column="remark"         />
 	</resultMap>
 	
 	<sql id="selectRoleVo">
 	    select distinct r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope,
-            r.status, r.del_flag, r.created_time, r.remark
+            r.status, r.del_flag, r.created_time
         from sys_role r
 	        left join sys_user_role ur on ur.role_id = r.role_id
 	        left join sys_user u on u.user_id = ur.user_id
@@ -91,7 +90,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="roleKey != null and roleKey != ''">role_key,</if>
  			<if test="roleSort != null and roleSort != ''">role_sort,</if>
  			<if test="status != null and status != ''">status,</if>
- 			<if test="remark != null and remark != ''">remark,</if>
  			<if test="createdBy != null and createdBy != ''">created_by,</if>
  			created_time
  		)values(
@@ -100,7 +98,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="roleKey != null and roleKey != ''">#{roleKey},</if>
  			<if test="roleSort != null and roleSort != ''">#{roleSort},</if>
  			<if test="status != null and status != ''">#{status},</if>
- 			<if test="remark != null and remark != ''">#{remark},</if>
  			<if test="createdBy != null and createdBy != ''">#{createdBy},</if>
  			sysdate()
  		)
@@ -113,7 +110,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="roleKey != null and roleKey != ''">role_key = #{roleKey},</if>
  			<if test="roleSort != null and roleSort != ''">role_sort = #{roleSort},</if>
  			<if test="status != null and status != ''">status = #{status},</if>
- 			<if test="remark != null">remark = #{remark},</if>
  			<if test="updatedBy != null and updatedBy != ''">updated_by = #{updatedBy},</if>
  			updated_time = sysdate()
  		</set>

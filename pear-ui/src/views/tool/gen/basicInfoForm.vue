@@ -22,11 +22,6 @@
           <el-input placeholder="请输入" v-model="info.functionAuthor" />
         </el-form-item>
       </el-col>
-      <el-col :span="24">
-        <el-form-item label="备注" prop="remark">
-          <el-input type="textarea" :rows="3" v-model="info.remark"></el-input>
-        </el-form-item>
-      </el-col>
     </el-row>
   </el-form>
 </template>

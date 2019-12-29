@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectDictTypeVo">
-        select dict_id, dict_name, dict_type, status, created_by, created_time, remark
+        select dict_id, dict_name, dict_type, status, created_by, created_time
 		from sys_dict_type
     </sql>
 
@@ -77,7 +77,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="dictName != null and dictName != ''">dict_name = #{dictName},</if>
  			<if test="dictType != null and dictType != ''">dict_type = #{dictType},</if>
  			<if test="status != null">status = #{status},</if>
- 			<if test="remark != null">remark = #{remark},</if>
  			<if test="updatedBy != null and updatedBy != ''">updated_by = #{updatedBy},</if>
  			updated_time = sysdate()
  		</set>
@@ -89,14 +88,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="dictName != null and dictName != ''">dict_name,</if>
  			<if test="dictType != null and dictType != ''">dict_type,</if>
  			<if test="status != null">status,</if>
- 			<if test="remark != null and remark != ''">remark,</if>
  			<if test="createdBy != null and createdBy != ''">created_by,</if>
  			created_time
  		)values(
  			<if test="dictName != null and dictName != ''">#{dictName},</if>
  			<if test="dictType != null and dictType != ''">#{dictType},</if>
  			<if test="status != null">#{status},</if>
- 			<if test="remark != null and remark != ''">#{remark},</if>
  			<if test="createdBy != null and createdBy != ''">#{createdBy},</if>
  			sysdate()
  		)

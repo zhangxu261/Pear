@@ -19,7 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="createdTime"   column="created_time"  />
 		<result property="updatedBy"     column="updated_by"    />
 		<result property="updatedTime"   column="updated_time"  />
-		<result property="remark"       column="remark"       />
 		<association property="dept"    column="dept_id" javaType="SysDept" resultMap="deptResult" />
 		<collection  property="roles"   javaType="java.util.List"        resultMap="RoleResult" />
 	</resultMap>
@@ -42,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectUserVo">
-        select u.user_id, u.dept_id, u.user_name, u.real_name, u.email, u.avatar, u.mobile, u.password, u.status, u.del_flag, u.created_by, u.created_time, u.remark,
+        select u.user_id, u.dept_id, u.user_name, u.real_name, u.email, u.avatar, u.mobile, u.password, u.status, u.del_flag, u.created_by, u.created_time,
         d.dept_id, d.parent_id, d.dept_name, d.order_num, d.leader, d.status as dept_status,
         r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status as role_status
         from sys_user u
@@ -108,7 +107,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="password != null and password != ''">password,</if>
  			<if test="status != null and status != ''">status,</if>
  			<if test="createdBy != null and createdBy != ''">created_by,</if>
- 			<if test="remark != null and remark != ''">remark,</if>
  			created_time
  		)values(
  			<if test="userId != null and userId != ''">#{userId},</if>
@@ -121,7 +119,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="password != null and password != ''">#{password},</if>
  			<if test="status != null and status != ''">#{status},</if>
  			<if test="createdBy != null and createdBy != ''">#{createdBy},</if>
- 			<if test="remark != null and remark != ''">#{remark},</if>
  			sysdate()
  		)
 	</insert>
@@ -138,7 +135,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="password != null and password != ''">password = #{password},</if>
  			<if test="status != null and status != ''">status = #{status},</if>
  			<if test="updatedBy != null and updatedBy != ''">updated_by = #{updatedBy},</if>
- 			<if test="remark != null">remark = #{remark},</if>
  			updated_time = sysdate()
  		</set>
  		where user_id = #{userId}

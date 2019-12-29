@@ -176,9 +176,6 @@
             :props="defaultProps"
           ></el-tree>
         </el-form-item>
-        <el-form-item label="备注">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
-        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -344,8 +341,7 @@ export default {
         roleSort: 0,
         status: "0",
         menuIds: [],
-        deptIds: [],
-        remark: undefined
+        deptIds: []
       };
       this.resetForm("form");
     },

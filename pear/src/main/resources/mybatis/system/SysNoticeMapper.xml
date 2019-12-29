@@ -14,11 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createdTime"     column="created_time"     />
         <result property="updatedBy"       column="updated_by"       />
         <result property="updatedTime"     column="updated_time"     />
-        <result property="remark"         column="remark"          />
     </resultMap>
     
     <sql id="selectNoticeVo">
-        select notice_id, notice_title, notice_type, notice_content, status, created_by, created_time, updated_by, updated_time, remark
+        select notice_id, notice_title, notice_type, notice_content, status, created_by, created_time, updated_by, updated_time
 		from sys_notice
     </sql>
     
@@ -48,7 +47,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="noticeType != null and noticeType != '' ">notice_type, </if>
 			<if test="noticeContent != null and noticeContent != '' ">notice_content, </if>
 			<if test="status != null and status != '' ">status, </if>
-			<if test="remark != null and remark != ''">remark,</if>
  			<if test="createdBy != null and createdBy != ''">created_by,</if>
  			created_time
  		)values(
@@ -56,7 +54,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="noticeType != null and noticeType != ''">#{noticeType}, </if>
 			<if test="noticeContent != null and noticeContent != ''">#{noticeContent}, </if>
 			<if test="status != null and status != ''">#{status}, </if>
-			<if test="remark != null and remark != ''">#{remark},</if>
  			<if test="createdBy != null and createdBy != ''">#{createdBy},</if>
  			sysdate()
 		)

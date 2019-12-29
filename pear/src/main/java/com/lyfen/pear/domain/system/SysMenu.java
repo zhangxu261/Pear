@@ -193,25 +193,4 @@ public class SysMenu extends BaseEntity {
         this.children = children;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("menuId", getMenuId())
-                .append("menuName", getMenuName())
-                .append("parentId", getParentId())
-                .append("orderNum", getOrderNum())
-                .append("path", getPath())
-                .append("component", getComponent())
-                .append("isFrame", getIsFrame())
-                .append("menuType", getMenuType())
-                .append("visible", getVisible())
-                .append("perms", getPerms())
-                .append("icon", getIcon())
-                .append("createdBy", getCreatedBy())
-                .append("createdTime", getCreatedTime())
-                .append("updatedBy", getUpdatedBy())
-                .append("updatedTime", getUpdatedTime())
-                .append("remark", getRemark())
-                .toString();
-    }
 }

@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectDictDataVo">
-        select dict_code, dict_sort, dict_label, dict_value, dict_type, css_class, list_class, is_default, status, created_by, created_time, remark
+        select dict_code, dict_sort, dict_label, dict_value, dict_type, css_class, list_class, is_default, status, created_by, created_time
 		from sys_dict_data
     </sql>
 
@@ -81,7 +81,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="listClass != null">list_class = #{listClass},</if>
  			<if test="isDefault != null and isDefault != ''">is_default = #{isDefault},</if>
  			<if test="status != null">status = #{status},</if>
- 			<if test="remark != null">remark = #{remark},</if>
  			<if test="updatedBy != null and updatedBy != ''">updated_by = #{updatedBy},</if>
  			updated_time = sysdate()
  		</set>
@@ -102,7 +101,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="listClass != null and listClass != ''">list_class,</if>
  			<if test="isDefault != null and isDefault != ''">is_default,</if>
  			<if test="status != null">status,</if>
- 			<if test="remark != null and remark != ''">remark,</if>
  			<if test="createdBy != null and createdBy != ''">created_by,</if>
  			created_time
  		)values(
@@ -114,7 +112,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="listClass != null and listClass != ''">#{listClass},</if>
  			<if test="isDefault != null and isDefault != ''">#{isDefault},</if>
  			<if test="status != null">#{status},</if>
- 			<if test="remark != null and remark != ''">#{remark},</if>
  			<if test="createdBy != null and createdBy != ''">#{createdBy},</if>
  			sysdate()
  		)

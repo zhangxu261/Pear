@@ -63,12 +63,12 @@ public class GenConstants {
      * 页面不需要查询字段
      */
     public static final String[] COLUMNNAME_NOT_QUERY = {"id", "created_by", "created_time", "del_flag", "updated_by",
-            "updated_time", "remark"};
+            "updated_time"};
 
     /**
      * Entity基类字段
      */
-    public static final String[] BASE_ENTITY = {"createdBy", "createdTime", "updatedBy", "updatedTime", "remark"};
+    public static final String[] BASE_ENTITY = {"createdBy", "createdTime", "updatedBy", "updatedTime"};
 
     /**
      * Tree基类字段
