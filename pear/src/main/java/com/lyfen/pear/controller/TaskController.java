@@ -52,4 +52,9 @@ public class TaskController extends BaseController {
         return toAjax(taskWorkService.addTaskWork(taskWork));
     }
 
+    @ApiOperation("添加任务")
+    @PostMapping("/addTask")
+    public AjaxResult addTask(@RequestBody Task task) {
+        return toAjax(taskService.addTask(task));
+    }
 }

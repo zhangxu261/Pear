@@ -1,5 +1,7 @@
 package com.lyfen.pear.service;
 
+import com.lyfen.pear.common.utils.SecurityUtils;
+import com.lyfen.pear.domain.Task;
 import com.lyfen.pear.domain.dto.TaskDTO;
 import com.lyfen.pear.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +70,17 @@ public class TaskService {
             }
         }
         return tlist;
+    }
+
+    public int addTask(Task task) {
+        if (task.getParentId() == null) {
+            task.setParentId(0L);
+        }
+        if (task.getUserId() == null) {
+            task.setUserId(SecurityUtils.getLoginUser().getUser().getUserId());
+        }
+        task.setSchedule(0.0f);
+        task.setActualTime(0);
+        return taskMapper.insert(task);
     }
 }
