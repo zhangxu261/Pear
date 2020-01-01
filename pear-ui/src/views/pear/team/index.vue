@@ -220,7 +220,6 @@ export default {
     submitMemberSearch(queryString, callback) {
       var list = [{}];
       searchMember(this.memberSearch).then(response => {
-        this.memberSearchList = response.data;
         for (let i of response.data) {
           i.value = i.userName + " - " + i.realName;
         }

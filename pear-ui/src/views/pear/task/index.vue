@@ -136,6 +136,17 @@
         <el-form-item label="预估工时" prop="estimateTime">
           <el-input type="number" v-model="taskForm.estimateTime" />
         </el-form-item>
+        <el-form-item label="分派给" prop="userName">
+          <el-autocomplete
+            :trigger-on-focus="false"
+            v-model="taskForm.userName"
+            :fetch-suggestions="submitMemberSearch"
+            placeholder="请输入用户名或者姓名"
+            @select="handleSelectMember"
+          >
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+          </el-autocomplete>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitTaskForm">确 定</el-button>
@@ -146,6 +157,7 @@
 
 <script>
 import { listProject, listTask, addTaskWork, addTask } from "@/api/pear/task";
+import { searchMember } from "@/api/pear/team";
 
 export default {
   data() {
@@ -172,6 +184,24 @@ export default {
       taskWorkOpen: false,
       // 表单参数
       taskWorkForm: {},
+      taskRules: {
+        code: [
+          { required: true, message: "任务编号不能为空", trigger: "blur" }
+        ],
+        subject: [
+          { required: true, message: "任务主题不能为空", trigger: "blur" }
+        ],
+        description: [
+          { required: true, message: "任务描述不能为空", trigger: "blur" },
+          { max: 255, message: "最多255个字符", trigger: "blur" }
+        ],
+        estimateTime: [
+          { required: true, message: "预估时间不能为空", trigger: "blur" }
+        ],
+        userName: [
+          { required: true, message: "任务必须分派一个成员", trigger: "blur" }
+        ]
+      },
       // 表单校验
       taskWorkRules: {
         workTime: [
@@ -182,8 +212,7 @@ export default {
           { max: 255, message: "最多255个字符", trigger: "blur" }
         ]
       },
-      taskForm: {},
-      taskWorkRules: {}
+      taskForm: {}
     };
   },
   created() {
@@ -229,7 +258,19 @@ export default {
       this.taskWorkForm.taskId = row.id;
       this.taskWorkForm.workDate = new Date();
     },
-    taskFormReset() {},
+    taskFormReset() {
+      this.taskForm = {
+        projectId: undefined,
+        parentId: undefined,
+        userId: undefined,
+        userName: undefined,
+        code: undefined,
+        subject: undefined,
+        description: undefined,
+        estimateTime: undefined
+      };
+      this.resetForm("taskForm");
+    },
     taskWorkFormReset() {
       this.taskWorkForm = {
         workTime: undefined,
@@ -258,6 +299,7 @@ export default {
           addTask(this.taskForm).then(response => {
             if (response.code === 200) {
               this.msgSuccess("添加成功");
+              this.getTaskList();
               this.taskOpen = false;
             } else {
               this.msgError(response.msg);
@@ -265,6 +307,19 @@ export default {
           });
         }
       });
+    },
+    submitMemberSearch(queryString, callback) {
+      var list = [{}];
+      searchMember(this.memberSearch).then(response => {
+        for (let i of response.data) {
+          i.value = i.userName + " - " + i.realName;
+        }
+        list = response.data;
+        callback(list);
+      });
+    },
+    handleSelectMember(item) {
+      this.taskForm.userId = item.userId;
     }
   }
 };

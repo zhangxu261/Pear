@@ -57,4 +57,11 @@ public class TaskController extends BaseController {
     public AjaxResult addTask(@RequestBody Task task) {
         return toAjax(taskService.addTask(task));
     }
+
+    @ApiOperation("获取当前用户的工作日志")
+    @GetMapping("/listUserTaskWork")
+    public AjaxResult listUserTaskWork() {
+        List<TaskWork> list = taskWorkService.listUserTaskWork();
+        return AjaxResult.success(list);
+    }
 }

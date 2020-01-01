@@ -36,15 +36,19 @@ public class ProjectService {
         return projectMapper.selectList(null);
     }
 
-    public int insert(Project project) {
-        return projectMapper.insert(project);
-    }
-
     public int update(Project project) {
         return projectMapper.updateById(project);
     }
 
     public Project selectById(Long id) {
         return projectMapper.selectById(id);
+    }
+
+    public int delProject(Long id) {
+        return projectMapper.deleteById(id);
+    }
+
+    public int addProject(Project project) {
+        return projectMapper.insert(project);
     }
 }

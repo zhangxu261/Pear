@@ -16,10 +16,25 @@ export function listTask(query) {
     })
 }
 
+export function addTask(data) {
+    return request({
+        url: '/pear/task/addTask',
+        method: 'post',
+        data: data
+    })
+}
+
 export function addTaskWork(data) {
     return request({
-      url: '/pear/task/addTaskWork',
-      method: 'post',
-      data: data
+        url: '/pear/task/addTaskWork',
+        method: 'post',
+        data: data
     })
-  }
+}
+
+export function listUserTaskWork() {
+    return request({
+        url: '/pear/task/listUserTaskWork',
+        method: 'get'
+    })
+}

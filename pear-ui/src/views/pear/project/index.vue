@@ -8,6 +8,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
+          v-hasPermi="['pear:project:add']"
         >创建新项目</el-button>
       </el-col>
     </el-row>
@@ -44,12 +45,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
+            v-hasPermi="['pear:project:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
+            v-hasPermi="['pear:project:del']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -64,8 +67,8 @@
     />
 
     <!-- 添加或修改项目对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px">
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-dialog :title="title" :visible.sync="open">
+      <el-form ref="form" :model="form" :rules="rules">
         <el-form-item label="项目编号" prop="code">
           <el-input v-model="form.code" placeholder="大写英文字符和数字，如ZT100" />
         </el-form-item>
@@ -76,7 +79,7 @@
           <el-input type="textarea" :rows="2" v-model="form.description" />
         </el-form-item>
         <el-form-item label="预估工时" prop="estimateTime">
-          <el-input v-model="form.estimateTime" placeholder="单位是小时（8小时/人日）" />
+          <el-input type="number" v-model="form.estimateTime" placeholder="单位是小时（8小时/人日）" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -118,6 +121,16 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        code: [
+          { required: true, message: "项目编号不能为空", trigger: "blur" }
+        ],
+        name: [
+          { required: true, message: "项目名称不能为空", trigger: "blur" }
+        ],
+        description: [
+          { required: true, message: "项目描述不能为空", trigger: "blur" },
+          { max: 255, message: "最多255个字符", trigger: "blur" }
+        ]
       }
     };
   },
@@ -201,13 +214,12 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const ids = row.id || this.ids;
-      this.$confirm('是否确认删除项目编号为"' + ids + '"的数据项?', "警告", {
+      this.$confirm('是否确认删除该项目?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return delProject(ids);
+          return delProject(row.id);
         }).then(() => {
           this.getList();
           this.msgSuccess("删除成功");

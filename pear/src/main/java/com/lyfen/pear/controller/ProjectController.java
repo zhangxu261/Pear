@@ -30,9 +30,9 @@ public class  ProjectController extends BaseController {
     }
 
     @ApiOperation("新增项目")
-    @PostMapping
-    public AjaxResult add(@RequestBody Project project) {
-        return toAjax(projectService.insert(project));
+    @PostMapping("/addProject")
+    public AjaxResult addProject(@RequestBody Project project) {
+        return toAjax(projectService.addProject(project));
     }
 
     @ApiOperation("跟ID获取项目信息")
@@ -46,4 +46,11 @@ public class  ProjectController extends BaseController {
     public AjaxResult edit(@RequestBody Project project) {
         return toAjax(projectService.update(project));
     }
+
+    @ApiOperation("项目删除")
+    @DeleteMapping("/{id}")
+    public AjaxResult delProject(@PathVariable("id") Long id) {
+        return toAjax(projectService.delProject(id));
+    }
+
 }

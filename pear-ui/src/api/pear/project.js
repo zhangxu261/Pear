@@ -20,7 +20,7 @@ export function getProject(id) {
 // 新增项目
 export function addProject(data) {
   return request({
-    url: '/pear/project',
+    url: '/pear/project/addProject',
     method: 'post',
     data: data
   })
