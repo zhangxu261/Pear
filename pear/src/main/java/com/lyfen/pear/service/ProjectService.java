@@ -1,7 +1,11 @@
 package com.lyfen.pear.service;
 
+import cn.hutool.core.util.NumberUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.lyfen.pear.domain.Project;
+import com.lyfen.pear.domain.Task;
 import com.lyfen.pear.mapper.ProjectMapper;
+import com.lyfen.pear.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +16,8 @@ public class ProjectService {
 
     @Autowired
     private ProjectMapper projectMapper;
+    @Autowired
+    private TaskMapper taskMapper;
 
     /**
      * 项目列表
@@ -51,5 +57,23 @@ public class ProjectService {
     public int insert(Project project) {
         project.setSchedule("0");
         return projectMapper.insert(project);
+    }
+
+    public void updateProjectSchedule(Long projectId) {
+        LambdaQueryWrapper<Task> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Task::getProjectId, projectId);
+        queryWrapper.eq(Task::getParentId, 0);
+        List<Task> taskList = taskMapper.selectList(queryWrapper);
+        Integer totalActualTime = 0;
+        Integer totalEstimateTime = 0;
+        for (Task task : taskList) {
+            totalActualTime += task.getActualTime();
+            totalEstimateTime += task.getEstimateTime();
+        }
+        String projectSchedule = NumberUtil.decimalFormat("#.##", NumberUtil.div(totalActualTime, totalEstimateTime).floatValue() * 100);
+        Project project = new Project();
+        project.setId(projectId);
+        project.setSchedule(projectSchedule);
+        projectMapper.updateById(project);
     }
 }

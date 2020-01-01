@@ -1,12 +1,11 @@
 package com.lyfen.pear.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.lyfen.pear.common.utils.SecurityUtils;
 import com.lyfen.pear.domain.Task;
 import com.lyfen.pear.domain.dto.TaskDTO;
-import com.lyfen.pear.event.TaskEvent;
 import com.lyfen.pear.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class TaskService {
     @Autowired
     private TaskMapper taskMapper;
     @Autowired
-    private ApplicationEventPublisher publisher;
+    private ProjectService projectService;
 
     public List<TaskDTO> selectList(Long projectId) {
         return taskMapper.selectListByProjectId(projectId);
@@ -88,8 +87,28 @@ public class TaskService {
         int row = taskMapper.insert(task);
         if (task.getParentId() != 0L && row > 0) {
             // 新建的任务为子任务时，需要重新刷新父任务的预估工时(包括父任务的父任务)
-            publisher.publishEvent(new TaskEvent(task.getParentId()));
+            updateTaskEstimate(task.getParentId());
         }
+        // 由于项目下面的任务的预估时间发生了变化，项目的进度也随之变化
+        projectService.updateProjectSchedule(task.getProjectId());
         return row;
     }
+
+    private void updateTaskEstimate(Long taskId) {
+        Task task = taskMapper.selectById(taskId);
+        LambdaQueryWrapper<Task> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Task::getParentId, task.getId());
+        List<Task> subTaskList = taskMapper.selectList(queryWrapper);
+        Integer totalEstimateTime = 0;
+        for (Task subTask : subTaskList) {
+            totalEstimateTime += subTask.getEstimateTime();
+        }
+        task.setEstimateTime(totalEstimateTime);
+        int row = taskMapper.updateById(task);
+        if (task.getParentId() != 0L && row > 0) {
+            // 更新项目的进度,查询项目下面的一级任务做统计
+            updateTaskEstimate(task.getParentId());
+        }
+    }
+
 }
