@@ -57,6 +57,12 @@ public class TeamController extends BaseController {
         return toAjax(teamService.removeMember(teamId, userId));
     }
 
+    @ApiOperation("设置团队成员组长")
+    @PostMapping("/setMemberLeader")
+    public AjaxResult setMemberLeader(Long teamId, Long userId) {
+        return toAjax(teamService.setMemberLeader(teamId, userId));
+    }
+
     @ApiOperation("新增团队")
     @PostMapping
     public AjaxResult add(@RequestBody Team team) {

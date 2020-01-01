@@ -3,7 +3,6 @@ package com.lyfen.pear.framework.web.exception;
 import com.lyfen.pear.common.constant.HttpStatus;
 import com.lyfen.pear.common.exception.BaseException;
 import com.lyfen.pear.common.exception.CustomException;
-import com.lyfen.pear.common.exception.DemoModeException;
 import com.lyfen.pear.common.utils.StringUtils;
 import com.lyfen.pear.framework.web.domain.AjaxResult;
 import org.slf4j.Logger;
@@ -95,11 +94,4 @@ public class GlobalExceptionHandler {
         return AjaxResult.error(message);
     }
 
-    /**
-     * 演示模式异常
-     */
-    @ExceptionHandler(DemoModeException.class)
-    public AjaxResult demoModeException(DemoModeException e) {
-        return AjaxResult.error("演示模式，不允许操作");
-    }
 }

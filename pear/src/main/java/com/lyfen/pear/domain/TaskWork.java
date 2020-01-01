@@ -23,8 +23,11 @@ public class TaskWork implements Serializable {
     @ApiModelProperty("成员id")
     private Long userId;
 
-    @ApiModelProperty("工作日志")
-    private String workLog;
+    @ApiModelProperty("工作内容")
+    private String workContent;
+
+    @ApiModelProperty("工作日期")
+    private LocalDateTime workDate;
 
     @ApiModelProperty("工时")
     private Integer workTime;

@@ -49,6 +49,18 @@ export function removeMember(teamId, userId) {
     })
 }
 
+export function setMemberLeader(teamId, userId) {
+    const data = {
+        teamId,
+        userId
+    }
+    return request({
+        url: '/pear/team/setMemberLeader',
+        method: 'post',
+        params: data
+    })
+}
+
 export function addTeam(data) {
     return request({
         url: '/pear/team',

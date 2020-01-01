@@ -56,29 +56,25 @@
               <span>{{ scope.row.code }} - {{ scope.row.subject }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="预估/实际工时">
-           <template slot-scope="scope">
-               <sapn>{{scope.row.estimateTime}} / {{scope.row.actualTime}}</sapn>
-           </template>
+          <el-table-column label="预估/实际工时" width="120">
+            <template slot-scope="scope">
+              <span>{{scope.row.estimateTime}} / {{scope.row.actualTime}}</span>
+            </template>
           </el-table-column>
-          <el-table-column label="进度" align="left" width="150">
+          <el-table-column label="进度" align="left" width="160">
             <template slot-scope="scope">
               <el-progress :percentage="scope.row.schedule" />
             </template>
           </el-table-column>
           <el-table-column label="分派给" align="left">
-              <template slot-scope="scope">
-              <div>{{scope.row.realName}}</div>
-              </template>
-          </el-table-column>
-          <el-table-column label="创建日期" align="left">
             <template slot-scope="scope">
-              <div>{{parseTime(scope.row.createdTime, '{y}-{m}-{d}')}}</div>
+              <div>{{scope.row.realName}}</div>
             </template>
           </el-table-column>
-          <el-table-column label="创建人" align="left">
+          <el-table-column label="创建" align="left">
             <template slot-scope="scope">
               <div>{{scope.row.createdBy}}</div>
+              <div>{{parseTime(scope.row.createdTime, '{y}-{m}-{d}')}}</div>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -98,7 +94,7 @@
               <el-button
                 size="mini"
                 type="text"
-                icon="el-icon-edit"
+                icon="el-icon-edit-outline"
                 @click="handleAddTaskWork(scope.row)"
               >工作日志</el-button>
             </template>
@@ -106,11 +102,50 @@
         </el-table>
       </el-col>
     </el-row>
+
+    <!-- 登记工时对话框 -->
+    <el-dialog :title="title" :visible.sync="taskWorkOpen">
+      <el-form ref="taskWorkForm" :model="taskWorkForm" :rules="taskWorkRules">
+        <el-form-item label="工作耗时" prop="workTime">
+          <el-input type="number" v-model="taskWorkForm.workTime" placeholder="单位是小时" />
+        </el-form-item>
+        <el-form-item label="登记日期" prop="workDate">
+          <el-date-picker type="date" v-model="taskWorkForm.workDate" />
+        </el-form-item>
+        <el-form-item label="工作内容" prop="workContent">
+          <el-input type="textarea" :rows="5" v-model="taskWorkForm.workContent" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitTaskWorkForm">保 存</el-button>
+        <!-- <el-button @click="cancel">取 消</el-button> -->
+      </div>
+    </el-dialog>
+
+    <el-dialog :title="title" :visible.sync="taskOpen">
+      <el-form ref="taskForm" :model="taskForm" :rules="taskRules">
+        <el-form-item label="任务编号" prop="code">
+          <el-input v-model="taskForm.code" placeholder="大写英文字符和数字，如T100" />
+        </el-form-item>
+        <el-form-item label="任务主题" prop="subject">
+          <el-input v-model="taskForm.subject" />
+        </el-form-item>
+        <el-form-item label="任务描述" prop="description">
+          <el-input type="textarea" :rows="2" v-model="taskForm.description" />
+        </el-form-item>
+        <el-form-item label="预估工时" prop="estimateTime">
+          <el-input type="number" v-model="taskForm.estimateTime" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitTaskForm">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { listProject, listTask } from "@/api/pear/task";
+import { listProject, listTask, addTaskWork, addTask } from "@/api/pear/task";
 
 export default {
   data() {
@@ -133,7 +168,22 @@ export default {
       // 表格树数据
       taskList: [],
       // 部门部门树选项
-      taskOptions: undefined
+      taskOptions: undefined,
+      taskWorkOpen: false,
+      // 表单参数
+      taskWorkForm: {},
+      // 表单校验
+      taskWorkRules: {
+        workTime: [
+          { required: true, message: "工作耗时不能为空", trigger: "blur" }
+        ],
+        workContent: [
+          { required: true, message: "工作内容不能为空", trigger: "blur" },
+          { max: 255, message: "最多255个字符", trigger: "blur" }
+        ]
+      },
+      taskForm: {},
+      taskWorkRules: {}
     };
   },
   created() {
@@ -159,11 +209,62 @@ export default {
       this.taskQueryParams.projectId = row.id;
       this.getTaskList();
     },
-    handleAddSubTask() {
-
+    handleAddTask() {
+      this.title = "添加任务";
+      this.taskOpen = true;
+      this.taskFormReset();
+      this.taskForm.projectId = this.taskQueryParams.projectId;
     },
-    handleAddTaskWork() {
-
+    handleAddSubTask(row) {
+      this.title = "添加子任务 - " + row.subject;
+      this.taskOpen = true;
+      this.taskFormReset();
+      this.taskForm.projectId = this.taskQueryParams.projectId;
+      this.taskForm.parentId = row.id;
+    },
+    handleAddTaskWork(row) {
+      this.title = "登记工时 - " + row.subject;
+      this.taskWorkOpen = true;
+      this.taskWorkFormReset();
+      this.taskWorkForm.taskId = row.id;
+      this.taskWorkForm.workDate = new Date();
+    },
+    taskFormReset() {},
+    taskWorkFormReset() {
+      this.taskWorkForm = {
+        workTime: undefined,
+        workDate: undefined,
+        workContent: undefined
+      };
+      this.resetForm("taskWorkForm");
+    },
+    submitTaskWorkForm() {
+      this.$refs["taskWorkForm"].validate(valid => {
+        if (valid) {
+          addTaskWork(this.taskWorkForm).then(response => {
+            if (response.code === 200) {
+              this.msgSuccess("登记成功");
+              this.taskWorkOpen = false;
+            } else {
+              this.msgError(response.msg);
+            }
+          });
+        }
+      });
+    },
+    submitTaskForm() {
+      this.$refs["taskForm"].validate(valid => {
+        if (valid) {
+          addTask(this.taskForm).then(response => {
+            if (response.code === 200) {
+              this.msgSuccess("添加成功");
+              this.taskOpen = false;
+            } else {
+              this.msgError(response.msg);
+            }
+          });
+        }
+      });
     }
   }
 };

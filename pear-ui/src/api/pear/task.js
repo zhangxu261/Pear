@@ -15,3 +15,11 @@ export function listTask(query) {
         params: query
     })
 }
+
+export function addTaskWork(data) {
+    return request({
+      url: '/pear/task/addTaskWork',
+      method: 'post',
+      data: data
+    })
+  }

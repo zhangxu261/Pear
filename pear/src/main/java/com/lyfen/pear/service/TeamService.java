@@ -1,6 +1,7 @@
 package com.lyfen.pear.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.lyfen.pear.common.exception.CustomException;
 import com.lyfen.pear.domain.Team;
 import com.lyfen.pear.domain.TeamMember;
 import com.lyfen.pear.domain.dto.MemberDTO;
@@ -60,5 +61,22 @@ public class TeamService {
         LambdaQueryWrapper<TeamMember> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(TeamMember::getTeamId, teamId).eq(TeamMember::getUserId, userId);
         return teamMemberMapper.delete(wrapper);
+    }
+
+    public int setMemberLeader(Long teamId, Long userId) {
+        LambdaQueryWrapper<TeamMember> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(TeamMember::getTeamId, teamId).eq(TeamMember::getUserId, userId);
+        List<TeamMember> list = teamMemberMapper.selectList(wrapper);
+        if (list.size() != 1) {
+            throw new CustomException("设置Leader失败");
+        } else {
+            TeamMember teamMember = list.get(0);
+            if (teamMember.getIsLeader() == null || teamMember.getIsLeader() == 0) {
+                teamMember.setIsLeader(1);
+            } else {
+                teamMember.setIsLeader(0);
+            }
+            return teamMemberMapper.updateById(teamMember);
+        }
     }
 }

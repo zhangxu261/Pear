@@ -2,6 +2,7 @@ package com.lyfen.pear.controller;
 
 import com.lyfen.pear.domain.Project;
 import com.lyfen.pear.domain.Task;
+import com.lyfen.pear.domain.TaskWork;
 import com.lyfen.pear.domain.Team;
 import com.lyfen.pear.domain.dto.MemberDTO;
 import com.lyfen.pear.domain.dto.TaskDTO;
@@ -10,12 +11,11 @@ import com.lyfen.pear.framework.web.domain.AjaxResult;
 import com.lyfen.pear.framework.web.page.TableDataInfo;
 import com.lyfen.pear.service.ProjectService;
 import com.lyfen.pear.service.TaskService;
+import com.lyfen.pear.service.TaskWorkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +28,8 @@ public class TaskController extends BaseController {
     private TaskService taskService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private TaskWorkService taskWorkService;
 
     @ApiOperation("查询项目列表")
     @GetMapping("/listProject")
@@ -43,4 +45,11 @@ public class TaskController extends BaseController {
         List<TaskDTO> list = taskService.selectList(projectId);
         return AjaxResult.success(taskService.buildTree(list));
     }
+
+    @ApiOperation("添加工作日志")
+    @PostMapping("/addTaskWork")
+    public AjaxResult addTaskWork(@RequestBody TaskWork taskWork) {
+        return toAjax(taskWorkService.addTaskWork(taskWork));
+    }
+
 }

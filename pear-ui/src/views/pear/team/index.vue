@@ -30,7 +30,13 @@
       <el-col :span="19" :xs="24">
         <el-row :gutter="10" class="mb8">
           <el-col :span="1.5">
-            <el-button type="primary" icon="el-icon-plus" size="mini" v-show="memberQueryParams.teamId" @click="handleAddMember">添加成员</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-plus"
+              size="mini"
+              v-show="memberQueryParams.teamId"
+              @click="handleAddMember"
+            >添加成员</el-button>
           </el-col>
         </el-row>
 
@@ -52,12 +58,22 @@
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope">
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-delete"
-                @click="handleRemoveMember(scope.row)"
-              >移除</el-button>
+              <el-tooltip class="item" effect="dark" content="设置或取消Leader" placement="top">
+                <el-button
+                  size="mini"
+                  type="text"
+                  :icon="scope.row.isLeader?'el-icon-user-solid':'el-icon-user'"
+                  @click="handleSetMemberLeader(scope.row)"
+                ></el-button>
+              </el-tooltip>
+              <el-tooltip class="item" effect="dark" content="移出该成员" placement="top">
+                <el-button
+                  size="mini"
+                  type="text"
+                  icon="el-icon-delete"
+                  @click="handleRemoveMember(scope.row)"
+                ></el-button>
+              </el-tooltip>
             </template>
           </el-table-column>
         </el-table>
@@ -90,7 +106,9 @@
         :fetch-suggestions="submitMemberSearch"
         placeholder="请输入用户名或者姓名"
         @select="handleSelectMember"
-      ><i slot="prefix" class="el-input__icon el-icon-search"></i></el-autocomplete>
+      >
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      </el-autocomplete>
     </el-dialog>
   </div>
 </template>
@@ -102,7 +120,8 @@ import {
   addTeam,
   searchMember,
   addMember,
-  removeMember
+  removeMember,
+  setMemberLeader
 } from "@/api/pear/team";
 
 export default {
@@ -166,10 +185,10 @@ export default {
     handleRemoveMember(row) {
       removeMember(this.memberQueryParams.teamId, row.userId).then(response => {
         if (response.code === 200) {
-           this.msgSuccess("移除成功");
-           this.getMemberList();
-        } 
-      })
+          this.msgSuccess("移除成功");
+          this.getMemberList();
+        }
+      });
     },
     submitTeamForm() {
       this.$refs["teamForm"].validate(valid => {
@@ -212,15 +231,25 @@ export default {
     handleSelectMember(item) {
       addMember(this.memberQueryParams.teamId, item.userId).then(response => {
         if (response.code === 200) {
-           this.msgSuccess("添加成功");
-           this.memberOpen = false;
-           this.getMemberList();
-        } 
-      })
+          this.msgSuccess("添加成功");
+          this.memberOpen = false;
+          this.getMemberList();
+        }
+      });
     },
     handleAddTeam() {
       this.teamOpen = true;
       this.title = "新建团队";
+    },
+    handleSetMemberLeader(row) {
+      setMemberLeader(this.memberQueryParams.teamId, row.userId).then(
+        response => {
+          if (response.code === 200) {
+            this.msgSuccess("设置成功");
+            this.getMemberList();
+          }
+        }
+      );
     }
   }
 };
