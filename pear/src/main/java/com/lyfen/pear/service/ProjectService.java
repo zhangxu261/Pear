@@ -49,6 +49,7 @@ public class ProjectService {
     }
 
     public int insert(Project project) {
+        project.setSchedule("0");
         return projectMapper.insert(project);
     }
 }

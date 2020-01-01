@@ -78,9 +78,9 @@
         <el-form-item label="项目描述" prop="description">
           <el-input type="textarea" :rows="2" v-model="form.description" />
         </el-form-item>
-        <el-form-item label="预估工时" prop="estimateTime">
+        <!-- <el-form-item label="预估工时" prop="estimateTime">
           <el-input type="number" v-model="form.estimateTime" placeholder="单位是小时（8小时/人日）" />
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>

@@ -3,8 +3,10 @@ package com.lyfen.pear.service;
 import com.lyfen.pear.common.utils.SecurityUtils;
 import com.lyfen.pear.domain.Task;
 import com.lyfen.pear.domain.dto.TaskDTO;
+import com.lyfen.pear.event.TaskEvent;
 import com.lyfen.pear.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class TaskService {
 
     @Autowired
     private TaskMapper taskMapper;
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     public List<TaskDTO> selectList(Long projectId) {
         return taskMapper.selectListByProjectId(projectId);
@@ -79,8 +83,13 @@ public class TaskService {
         if (task.getUserId() == null) {
             task.setUserId(SecurityUtils.getLoginUser().getUser().getUserId());
         }
-        task.setSchedule(0.0f);
+        task.setSchedule("0");
         task.setActualTime(0);
-        return taskMapper.insert(task);
+        int row = taskMapper.insert(task);
+        if (task.getParentId() != 0L && row > 0) {
+            // 新建的任务为子任务时，需要重新刷新父任务的预估工时(包括父任务的父任务)
+            publisher.publishEvent(new TaskEvent(task.getParentId()));
+        }
+        return row;
     }
 }
