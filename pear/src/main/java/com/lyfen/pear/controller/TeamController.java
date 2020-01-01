@@ -26,7 +26,7 @@ public class TeamController extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list() {
         startPage();
-        List<Team> list = teamService.selectList();
+        List<Team> list = teamService.list();
         return getDataTable(list);
     }
 

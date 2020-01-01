@@ -19,7 +19,7 @@ public class TaskWorkService {
     @Autowired
     private TaskWorkMapper taskWorkMapper;
 
-    public int addTaskWork(TaskWork taskWork) {
+    public int insert(TaskWork taskWork) {
         if (taskWork.getWorkDate() == null) {
             taskWork.setWorkDate(LocalDateTime.now());
         }

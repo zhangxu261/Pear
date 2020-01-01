@@ -49,7 +49,7 @@ public class TaskController extends BaseController {
     @ApiOperation("添加工作日志")
     @PostMapping("/addTaskWork")
     public AjaxResult addTaskWork(@RequestBody TaskWork taskWork) {
-        return toAjax(taskWorkService.addTaskWork(taskWork));
+        return toAjax(taskWorkService.insert(taskWork));
     }
 
     @ApiOperation("添加任务")

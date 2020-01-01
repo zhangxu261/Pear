@@ -44,11 +44,11 @@ public class ProjectService {
         return projectMapper.selectById(id);
     }
 
-    public int delProject(Long id) {
+    public int delete(Long id) {
         return projectMapper.deleteById(id);
     }
 
-    public int addProject(Project project) {
+    public int insert(Project project) {
         return projectMapper.insert(project);
     }
 }

@@ -20,7 +20,7 @@ public class TeamService {
     @Autowired
     private TeamMemberMapper teamMemberMapper;
 
-    public List<Team> selectList() {
+    public List<Team> list() {
         return teamMapper.selectList(null);
     }
 
