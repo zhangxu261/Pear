@@ -28,7 +28,7 @@ public class Project implements Serializable {
     private String description;
 
     @ApiModelProperty("项目进度")
-    private Float schedule;
+    private String schedule;
 
     @ApiModelProperty("预估工时")
     private Integer estimateTime;

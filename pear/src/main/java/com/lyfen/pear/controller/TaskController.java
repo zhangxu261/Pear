@@ -55,7 +55,7 @@ public class TaskController extends BaseController {
     @ApiOperation("添加任务")
     @PostMapping("/addTask")
     public AjaxResult addTask(@RequestBody Task task) {
-        return toAjax(taskService.addTask(task));
+        return toAjax(taskService.insert(task));
     }
 
     @ApiOperation("获取当前用户的工作日志")

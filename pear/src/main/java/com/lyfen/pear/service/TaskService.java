@@ -72,7 +72,7 @@ public class TaskService {
         return tlist;
     }
 
-    public int addTask(Task task) {
+    public int insert(Task task) {
         if (task.getParentId() == null) {
             task.setParentId(0L);
         }

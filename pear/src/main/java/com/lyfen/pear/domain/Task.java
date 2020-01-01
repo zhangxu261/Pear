@@ -34,7 +34,7 @@ public class Task implements Serializable {
     private String description;
 
     @ApiModelProperty("任务进度")
-    private Float schedule;
+    private String schedule;
 
     @ApiModelProperty("任务类型")
     private Integer type;
